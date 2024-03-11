@@ -147,4 +147,47 @@ export type CreateUserParams = {
     params: { id: string }
     searchParams: { [key: string]: string | string[] | undefined }
   }
-  
+
+// ====== PRODUCT PARAMS
+
+export type GetAllProductsParams = {
+    query: string
+    category: string
+    limit: number
+    page: number
+}
+
+export type CreateProductsParams = {
+    product: {
+        title: string
+        description: string
+        imageUrl: string
+        price: string
+        url: string
+        stock: number
+    }
+    path: string
+}
+
+export type UpdateProductsParams = {
+    product: {
+        _id: string
+        title: string
+        description: string
+        imageUrl: string
+        price: string
+        url: string
+        stock: number
+    }
+    path: string
+}
+
+export type Product = {
+    _id: string
+    title: string
+    description: string
+    price: string
+    imageUrl: string
+    url: string
+    stock: number
+}

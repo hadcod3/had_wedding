@@ -1,13 +1,13 @@
 "use client"
 
-import { IEvent } from '@/lib/database/models/event.model'
+import { IPackage } from '@/lib/database/models/package.model'
 import { SignedIn, SignedOut, useUser } from '@clerk/nextjs'
 import Link from 'next/link'
 import React from 'react'
 import { Button } from '../ui/button'
 import Checkout from './Checkout'
 
-const CheckoutButton = ({ event }: { event: IEvent }) => {
+const CheckoutButton = ({ event }: { event: IPackage }) => {
   const { user } = useUser();
   const userId = user?.publicMetadata.userId as string;
   const hasEventFinished = new Date(event.endDateTime) < new Date();

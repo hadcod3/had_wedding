@@ -1,4 +1,4 @@
-import { IEvent } from '@/lib/database/models/event.model'
+import { IPackage } from '@/lib/database/models/package.model'
 import React from 'react'
 import Card from './Card'
 import Pagination from './Pagination'
@@ -6,7 +6,7 @@ import { Button } from '../ui/button'
 import Link from 'next/link'
 
 type CollectionProps = {
-  data: IEvent[],
+  data: IPackage[],
   emptyTitle: string,
   emptyStateSubtext: string,
   limit: number,

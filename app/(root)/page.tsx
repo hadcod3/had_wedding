@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { getAllEvents } from "@/lib/actions/event.actions";
+import { getAllEvents } from "@/lib/actions/package.actions";
 import { SearchParamProps } from '@/types';
 import Image from "next/image";
 import Link from "next/link";
@@ -52,7 +52,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
                 </div>
             </section>
 
-            <section className="wrapper my-8 flex flex-col md:gap-12">
+            <section id="events" className="wrapper my-8 flex flex-col md:gap-12">
                 <h2 className="h2-bold text-center">Trusted by <br/> Thousands of Events</h2>
                 <Collection
                 data={events?.data}

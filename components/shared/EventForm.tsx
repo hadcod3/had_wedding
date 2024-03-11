@@ -19,14 +19,14 @@ import { useUploadThing } from '@/lib/uploadthing'
 import "react-datepicker/dist/react-datepicker.css";
 import { Checkbox } from "../ui/checkbox"
 import { useRouter } from "next/navigation"
-import { createEvent, updateEvent } from "@/lib/actions/event.actions"
-import { IEvent } from "@/lib/database/models/event.model"
+import { createEvent, updateEvent } from "@/lib/actions/package.actions"
+import { IPackage } from "@/lib/database/models/package.model"
 
 
 type EventFormProps = {
   userId: string
   type: "Create" | "Update"
-  event?: IEvent,
+  event?: IPackage,
   eventId?: string
 }
 

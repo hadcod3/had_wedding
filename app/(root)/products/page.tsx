@@ -1,22 +1,8 @@
-
 import CategoryFilter from "@/components/shared/CategoryFilter"
 import Collection from "@/components/shared/Collection"
 import Search from "@/components/shared/Search"
-import { getAllEvents } from "@/lib/actions/package.actions"
-import { SearchParamProps } from "@/types"
 
-const Packages = async ({ searchParams }: SearchParamProps) => {
-    const page = Number(searchParams?.page) || 1;
-    const searchText = (searchParams?.query as string) || '';
-    const category = (searchParams?.category as string) || '';
-    
-    const events = await getAllEvents({
-        query: searchText,
-        category,
-        page,
-        limit: 15
-    })
-
+const Products = () => {
     return (
         <>
             <section className="wrapper my-8 flex flex-col md:gap-12">
@@ -25,7 +11,7 @@ const Packages = async ({ searchParams }: SearchParamProps) => {
                     <Search />
                     <CategoryFilter/>
                 </div>
-                <Collection
+                {/* <Collection
                 data={events?.data}
                 emptyTitle="No Packages Found"
                 emptyStateSubtext="Check later"
@@ -33,10 +19,10 @@ const Packages = async ({ searchParams }: SearchParamProps) => {
                 limit={15}
                 page={page}
                 totalPages={events?.totalPages}
-                />
+                /> */}
             </section>
-        </>
+            </>
     )
 }
 
-export default Packages
+export default Products

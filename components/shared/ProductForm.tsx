@@ -17,23 +17,29 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation"
 import { IProduct } from "@/lib/database/models/product.model"
 import { createProduct, updateProduct } from "@/lib/actions/product.action"
+import { productDefaultValues } from "@/constants"
 
 
 type ProductFormProps = {
-    userId: string
     type: "Create" | "Update"
-    event?: IProduct,
-    eventId?: string
-    }
+    productId?: string
+    product?: IProduct
+}
 
-const ProductForm = ({ userId, type, event, eventId }: ProductFormProps) => {
+const ProductForm = ({ type, productId, product }: ProductFormProps) => {
     const [files, setFiles] = useState<File[]>([])
+    const initialValues = product && type === 'Update' 
+      ? { 
+        ...product, 
+      }
+      : productDefaultValues;
     const router = useRouter();
 
     const { startUpload } = useUploadThing('imageUploader')
 
     const form = useForm<z.infer<typeof productFormSchema>>({
-        resolver: zodResolver(productFormSchema)
+        resolver: zodResolver(productFormSchema),
+        defaultValues: initialValues
     })
     
     async function onSubmit(values: z.infer<typeof productFormSchema>) {
@@ -58,7 +64,8 @@ const ProductForm = ({ userId, type, event, eventId }: ProductFormProps) => {
 
             if(newProduct) {
             form.reset();
-            router.push(`/products/${newProduct._id}`)
+            // router.push(`/products/${newProduct._id}`)
+            router.push(`/`)
             }
         } catch (error) {
             console.log(error);
@@ -66,20 +73,20 @@ const ProductForm = ({ userId, type, event, eventId }: ProductFormProps) => {
         }
 
         if(type === 'Update') {
-        if(!eventId) {
+        if(!productId) {
             router.back()
             return;
         }
 
         try {
-            const updatedEvent = await updateProduct({
-            product: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
-            path: `/products/${eventId}`
+            const updatedProduct = await updateProduct({
+            product: { ...values, imageUrl: uploadedImageUrl, _id: productId },
+            path: `/products/${productId}`
             })
 
-            if(updatedEvent) {
+            if(updatedProduct) {
             form.reset();
-            router.push(`/products/${updatedEvent._id}`)
+            router.push(`/products/${updatedProduct._id}`)
             }
         } catch (error) {
             console.log(error);
@@ -97,7 +104,7 @@ const ProductForm = ({ userId, type, event, eventId }: ProductFormProps) => {
                 render={({ field }) => (
                 <FormItem className="w-full">
                     <FormControl>
-                    <Input placeholder="Event title" {...field} className="input-field" />
+                    <Input placeholder="Product Name" {...field} className="input-field" />
                     </FormControl>
                     <FormMessage />
                 </FormItem>
@@ -171,7 +178,29 @@ const ProductForm = ({ userId, type, event, eventId }: ProductFormProps) => {
                     </FormItem>
                 )}
                 />   
-            <FormField
+                <FormField
+                control={form.control}
+                name="stock"
+                render={({ field }) => (
+                    <FormItem className="w-full">
+                    <FormControl>
+                        <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+                        <Image
+                            src="/assets/icons/link.svg"
+                            alt="stock"
+                            width={24}
+                            height={24}
+                            className="filter-grey"
+                        />
+                        <Input type="number" placeholder="Stock" {...field} className="p-regular-16 border-0 bg-grey-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0" />
+                        </div>
+
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
+                />   
+            {/* <FormField
                 control={form.control}
                 name="url"
                 render={({ field }) => (
@@ -192,7 +221,7 @@ const ProductForm = ({ userId, type, event, eventId }: ProductFormProps) => {
                     <FormMessage />
                     </FormItem>
                 )}
-                />
+                /> */}
             </div>
 
             <Button 
@@ -203,7 +232,7 @@ const ProductForm = ({ userId, type, event, eventId }: ProductFormProps) => {
             >
             {form.formState.isSubmitting ? (
                 'Submitting...'
-            ): `${type} Event `}</Button>
+            ): `${type} Product `}</Button>
             
         </form>
         </Form>

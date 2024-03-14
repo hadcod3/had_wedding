@@ -12,8 +12,8 @@ export const headerLinks = [
       route: '/products',
     },
     {   
-      label: 'Tools',
-      route: '/tools',
+      label: 'Gears',
+      route: '/gears',
     },
     {
       label: 'My Profile',
@@ -56,4 +56,14 @@ export const eventDefaultValues = {
     isFree: false,
     url: '',
 }
+
+export const productDefaultValues = {
+    title: '',
+    description: '',
+    imageUrl: '',
+    price: '',
+    stock: '',
+}
+
+
   

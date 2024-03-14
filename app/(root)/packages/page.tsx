@@ -1,4 +1,3 @@
-
 import CategoryFilter from "@/components/shared/CategoryFilter"
 import Collection from "@/components/shared/Collection"
 import Search from "@/components/shared/Search"
@@ -21,8 +20,8 @@ const Packages = async ({ searchParams }: SearchParamProps) => {
         <>
             <section className="wrapper my-8 flex flex-col md:gap-12">
                 <h2 className="h2-bold">Trusted by <br/> Thousands of Events</h2>
-                <div className="flex w-full flex-col gap-5 md:flex-row">
-                    <Search />
+                <div className="flex w-full flex-col gap-5 py-5 md:flex-row">
+                    <Search placeholder="Search Package"/>
                     <CategoryFilter/>
                 </div>
                 <Collection

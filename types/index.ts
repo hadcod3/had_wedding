@@ -163,8 +163,7 @@ export type CreateProductsParams = {
         description: string
         imageUrl: string
         price: string
-        url: string
-        stock: number
+        stock: string
     }
     path: string
 }
@@ -176,8 +175,7 @@ export type UpdateProductsParams = {
         description: string
         imageUrl: string
         price: string
-        url: string
-        stock: number
+        stock: string
     }
     path: string
 }
@@ -188,6 +186,5 @@ export type Product = {
     description: string
     price: string
     imageUrl: string
-    url: string
-    stock: number
+    stock: string
 }

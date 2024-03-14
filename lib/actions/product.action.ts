@@ -15,8 +15,6 @@ const getCategoryByName = async (name: string) => {
 
 const populateProduct = (query: any) => {
     return query
-      .populate({ path: 'organizer', model: User, select: '_id firstName lastName' })
-      .populate({ path: 'category', model: Category, select: '_id name' })
 }
 
 // CREATE
@@ -52,11 +50,11 @@ export async function updateProduct({ product, path }: UpdateProductsParams) {
 }
 
 // GET ONE EVENT BY ID
-export async function getProductById(eventId: string) {
+export async function getProductById(productId: string) {
     try {
       await connectToDatabase()
   
-      const product = await populateProduct(Product.findById(eventId))
+      const product = await populateProduct(Product.findById(productId))
   
       if (!product) throw new Error('Product not found')
   
@@ -67,7 +65,7 @@ export async function getProductById(eventId: string) {
 }
 
 // GET ALL PRODUCTS
-export async function getAllProducts({ query, limit = 6, category }: GetAllProductsParams) {
+export async function getAllProducts({ query, limit = 6, category, page }: GetAllProductsParams) {
     try {
       await connectToDatabase()
   
@@ -77,9 +75,17 @@ export async function getAllProducts({ query, limit = 6, category }: GetAllProdu
         $and: [titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
       }
 
+      const skipAmount = (Number(page) - 1) * limit
+      const eventsQuery = Product.find(conditions)
+        .sort({ createdAt: 'desc' })
+        .skip(skipAmount)
+        .limit(limit)
+
+      const events = await populateProduct(eventsQuery)
       const productsCount = await Product.countDocuments(conditions)
   
       return {
+        data: JSON.parse(JSON.stringify(events)),
         totalPages: Math.ceil(productsCount / limit),
       }
     } catch (error) {

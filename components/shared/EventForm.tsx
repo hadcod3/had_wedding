@@ -26,7 +26,7 @@ import { IPackage } from "@/lib/database/models/package.model"
 type EventFormProps = {
   userId: string
   type: "Create" | "Update"
-  event?: IPackage,
+  event?: IPackage
   eventId?: string
 }
 

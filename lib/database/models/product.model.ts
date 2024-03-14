@@ -7,18 +7,16 @@ export interface IProduct extends Document {
     createdAt: Date;
     imageUrl: string;
     price: string;
-    url?: string;
-    stock: number;
+    stock: string;
 }
 
 const ProductSchema = new Schema({
     title: { type: String, required: true},
-    description: { type: String },
+    description: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     imageUrl: { type: String, required: true },
-    price: { type: String },
-    url: { type: String },
-    stock: { type: Number, required: true}
+    price: { type: String, required: true },
+    stock: { type: String, required: true}
 })
 
 const Product = models.Product || model('Product', ProductSchema);

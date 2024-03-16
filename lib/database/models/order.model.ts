@@ -14,7 +14,7 @@ export interface IOrder extends Document {
     lastName: string
   }
 }
-
+ 
 export type IOrderItem = {
   _id: string
   totalAmount: string

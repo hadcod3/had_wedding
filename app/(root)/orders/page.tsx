@@ -1,14 +1,14 @@
 import Search  from '@/components/shared/Search'
-import { getOrdersByEvent } from '@/lib/actions/order.actions'
+import { getOrdersByPacket } from '@/lib/actions/order.actions'
 import { formatDateTime, formatPrice } from '@/lib/utils'
 import { SearchParamProps } from '@/types'
 import { IOrderItem } from '@/lib/database/models/order.model'
 
 const Orders = async ({ searchParams }: SearchParamProps) => {
-  const eventId = (searchParams?.eventId as string) || ''
+  const packetId = (searchParams?.packetId as string) || ''
   const searchText = (searchParams?.query as string) || ''
 
-  const orders = await getOrdersByEvent({ eventId, searchString: searchText })
+  const orders = await getOrdersByPacket({ packetId, searchString: searchText })
 
   return (
     <>
@@ -47,7 +47,7 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
                       className="p-regular-14 lg:p-regular-16 border-b "
                       style={{ boxSizing: 'border-box' }}>
                       <td className="min-w-[250px] py-4 text-primary-500">{row._id}</td>
-                      <td className="min-w-[200px] flex-1 py-4 pr-4">{row.eventTitle}</td>
+                      <td className="min-w-[200px] flex-1 py-4 pr-4">{row.packetTitle}</td>
                       <td className="min-w-[150px] py-4">{row.buyer}</td>
                       <td className="min-w-[100px] py-4">
                         {formatDateTime(row.createdAt).dateTime}

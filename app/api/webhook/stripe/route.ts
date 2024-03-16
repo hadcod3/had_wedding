@@ -37,4 +37,3 @@ export async function POST(request: Request) {
 
   return new Response('', { status: 200 })
 }
-event

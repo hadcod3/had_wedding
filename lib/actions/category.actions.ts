@@ -1,29 +1,29 @@
 "use server"
 
-import { CreateCategoryParams } from "@/types"
+import { CreatePacketCategoryParams } from "@/types"
 import { handleError } from "../utils"
 import { connectToDatabase } from "../database"
-import Category from "../database/models/category.model"
+import PacketCategory from "../database/models/packetCategory.model"
 
-export const createCategory = async ({ categoryName }: CreateCategoryParams) => {
+export const createCategory = async ({ packetCategoryName }: CreatePacketCategoryParams) => {
   try {
     await connectToDatabase();
 
-    const newCategory = await Category.create({ name: categoryName });
+    const newPacketCategory = await PacketCategory.create({ name: packetCategoryName });
 
-    return JSON.parse(JSON.stringify(newCategory));
+    return JSON.parse(JSON.stringify(newPacketCategory));
   } catch (error) {
     handleError(error)
   }
-}
+} 
 
-export const getAllCategories = async () => {
+export const getAllPacketCategories = async () => {
   try {
     await connectToDatabase();
 
-    const categories = await Category.find();
+    const packetCategories = await PacketCategory.find();
 
-    return JSON.parse(JSON.stringify(categories));
+    return JSON.parse(JSON.stringify(packetCategories));
   } catch (error) {
     handleError(error)
   }

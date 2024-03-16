@@ -1,4 +1,4 @@
-import CategoryFilter from "@/components/shared/CategoryFilter"
+import PacketCategoryFilter from "@/components/shared/PacketCategoryFilter"
 import Collection from "@/components/shared/Collection"
 import Search from "@/components/shared/Search"
 import { getAllPackets } from "@/lib/actions/packet.actions"
@@ -22,7 +22,7 @@ const Packages = async ({ searchParams }: SearchParamProps) => {
                 <h2 className="h2-bold">Trusted by <br/> Thousands of Packet</h2>
                 <div className="flex w-full flex-col gap-5 py-5 md:flex-row">
                     <Search placeholder="Search Packets"/>
-                    <CategoryFilter/>
+                    <PacketCategoryFilter/>
                 </div>
                 <Collection
                 data={packets?.data}

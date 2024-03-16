@@ -10,7 +10,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
     const searchText = (searchParams?.query as string) || '';
     const category = (searchParams?.category as string) || '';
 
-    const events = await getAllPackets({
+    const packets = await getAllPackets({
         query: searchText,
         category,
         page,
@@ -29,7 +29,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque temporibus optio magnam sint veniam nulla error vero amet nostrum accusamus.
                         </p>
                         <Button size="lg" asChild className="button w-full sm:w-fit">
-                            <Link href="#events">Explore Now</Link>
+                            <Link href="#packets">Explore Now</Link>
                         </Button>
                     </div>
                     <Image
@@ -52,16 +52,16 @@ export default async function Home({ searchParams }: SearchParamProps) {
                 </div>
             </section>
 
-            <section id="events" className="wrapper my-8 flex flex-col md:gap-12">
+            <section id="packets" className="wrapper my-8 flex flex-col md:gap-12">
                 <h2 className="h2-bold text-center">Trusted by <br/> Thousands of Customers</h2>
                 <Collection
-                data={events?.data}
-                emptyTitle="No Events Found"
+                data={packets?.data}
+                emptyTitle="No Packets Found"
                 emptyStateSubtext="Check later"
                 collectionType="Sample_Packages"
                 limit={3}
                 page={page}
-                totalPages={events?.totalPages}
+                totalPages={packets?.totalPages}
                 />
             </section>
 

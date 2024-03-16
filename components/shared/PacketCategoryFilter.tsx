@@ -7,22 +7,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { getAllCategories } from "@/lib/actions/category.actions";
-import { ICategory } from "@/lib/database/models/category.model";
+import { getAllPacketCategories } from "@/lib/actions/category.actions";
+import { IPacketCategory } from "@/lib/database/models/packetCategory.model";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const CategoryFilter = () => {
-  const [categories, setCategories] = useState<ICategory[]>([]);
+const PacketCategoryFilter = () => {
+  const [categories, setCategories] = useState<IPacketCategory[]>([]);
   const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const getCategories = async () => {
-      const categoryList = await getAllCategories();
+      const categoryList = await getAllPacketCategories();
 
-      categoryList && setCategories(categoryList as ICategory[])
+      categoryList && setCategories(categoryList as IPacketCategory[])
     }
 
     getCategories();
@@ -65,4 +65,4 @@ const CategoryFilter = () => {
   )
 }
 
-export default CategoryFilter
+export default PacketCategoryFilter

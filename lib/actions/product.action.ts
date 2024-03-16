@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 
 import { connectToDatabase } from '@/lib/database'  
-import Category from '@/lib/database/models/category.model'
+import Category from '@/lib/database/models/packetCategory.model'
 import { handleError } from '@/lib/utils'
 import { CreateProductsParams, GetAllProductsParams, UpdateProductsParams } from '@/types'
 import Product from '../database/models/product.model'

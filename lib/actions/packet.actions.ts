@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { connectToDatabase } from '@/lib/database'
 import Packet from '@/lib/database/models/packet.model'
 import User from '@/lib/database/models/user.model'
-import Category from '@/lib/database/models/category.model'
+import PacketCategory from '@/lib/database/models/packetCategory.model'
 import { handleError } from '@/lib/utils'
 
 import {
@@ -18,13 +18,12 @@ import {
 } from '@/types'
 
 const getCategoryByName = async (name: string) => {
-  return Category.findOne({ name: { $regex: name, $options: 'i' } })
+  return PacketCategory.findOne({ name: { $regex: name, $options: 'i' } })
 }
 
 const populatePacket = (query: any) => {
   return query
-    .populate({ path: 'organizer', model: User, select: '_id firstName lastName' })
-    .populate({ path: 'category', model: Category, select: '_id name' })
+    .populate({ path: 'category', model: PacketCategory, select: '_id name' })
 }
 
 // CREATE

@@ -1,7 +1,7 @@
 import PacketForm from "@/components/shared/PacketForm"
 import { auth } from "@clerk/nextjs"
 
-const CreateEvent = () => {
+const CreatePacket = () => {
     const { sessionClaims } = auth();
 
     const userId = sessionClaims?.userId as string;
@@ -21,4 +21,4 @@ const CreateEvent = () => {
     )
 }
 
-export default CreateEvent
+export default CreatePacket

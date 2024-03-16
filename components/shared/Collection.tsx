@@ -1,12 +1,12 @@
-import { IPackage } from '@/lib/database/models/packet.model'
+import { IPacket } from '@/lib/database/models/packet.model'
 import React from 'react'
-import Card from './Card'
+import Card from './PacketCard'
 import Pagination from './Pagination'
 import { Button } from '../ui/button'
 import Link from 'next/link'
 
 type CollectionProps = {
-  data: IPackage[],
+  data: IPacket[],
   emptyTitle: string,
   emptyStateSubtext: string,
   limit: number,

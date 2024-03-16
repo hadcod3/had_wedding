@@ -78,8 +78,8 @@ export type CreatePacketParams = {
   }
   
   // ====== CATEGORY PARAMS
-  export type CreateCategoryParams = {
-    categoryName: string
+  export type CreatePacketCategoryParams = {
+    packetCategoryName: string
   }
   
   // ====== ORDER PARAMS

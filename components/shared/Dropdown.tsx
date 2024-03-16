@@ -5,7 +5,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-  import { ICategory } from "@/lib/database/models/category.model"
+  import { IPacketCategory } from "@/lib/database/models/packetCategory.model"
   import { startTransition, useEffect, useState } from "react"
   import {
     AlertDialog,
@@ -19,7 +19,7 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
   import { Input } from "../ui/input"
-  import { createCategory, getAllCategories } from "@/lib/actions/category.actions"
+  import { createCategory, getAllPacketCategories } from "@/lib/actions/category.actions"
   
   type DropdownProps = {
     value?: string
@@ -27,12 +27,12 @@ import {
   }
   
   const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
-    const [categories, setCategories] = useState<ICategory[]>([])
+    const [categories, setCategories] = useState<IPacketCategory[]>([])
     const [newCategory, setNewCategory] = useState('');
   
     const handleAddCategory = () => {
       createCategory({
-        categoryName: newCategory.trim()
+        packetCategoryName: newCategory.trim()
       })
         .then((category) => {
           setCategories((prevState) => [...prevState, category])
@@ -41,9 +41,9 @@ import {
   
     useEffect(() => {
       const getCategories = async () => {
-        const categoryList = await getAllCategories();
+        const categoryList = await getAllPacketCategories();
   
-        categoryList && setCategories(categoryList as ICategory[])
+        categoryList && setCategories(categoryList as IPacketCategory[])
       }
   
       getCategories();

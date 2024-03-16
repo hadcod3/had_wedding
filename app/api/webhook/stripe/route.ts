@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 
     const order = {
       stripeId: id,
-      eventId: metadata?.eventId || '',
+      packetId: metadata?.packetId || '',
       buyerId: metadata?.buyerId || '',
       totalAmount: amount_total ? (amount_total / 100).toString() : '0',
       createdAt: new Date(),
@@ -37,3 +37,4 @@ export async function POST(request: Request) {
 
   return new Response('', { status: 200 })
 }
+event

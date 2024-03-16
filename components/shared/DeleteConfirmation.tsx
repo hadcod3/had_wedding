@@ -16,9 +16,9 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 
-import { deleteEvent } from '@/lib/actions/packet.actions'
+import { deletePacket } from '@/lib/actions/packet.actions'
 
-export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
+export const DeleteConfirmation = ({ packetId }: { packetId: string }) => {
   const pathname = usePathname()
   let [isPending, startTransition] = useTransition()
 
@@ -42,7 +42,7 @@ export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
           <AlertDialogAction
             onClick={() =>
               startTransition(async () => {
-                await deleteEvent({ eventId, path: pathname })
+                await deletePacket({ packetId, path: pathname })
               })
             }>
             {isPending ? 'Deleting...' : 'Delete'}

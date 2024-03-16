@@ -19,9 +19,11 @@ const Products = async ({ searchParams }: SearchParamProps) => {
     return (
         <>
             <section className="wrapper my-8 flex flex-col md:gap-12">
-                <h2 className="h2-bold">Trusted by <br/> Thousands of Events</h2>
-                <div className="w-full py-5">
-                    <Search placeholder="Search Product"/>
+                <div className="flex justify-between w-full py-5 flex-col sm:flex-row">
+                    <h2 className="h2-bold">Trusted by <br/> Thousands of customers</h2>
+                    <div className="py-4">
+                        <Search placeholder="Search Product"/>
+                    </div>
                 </div>
                 <ProductCollection
                     data={events?.data}

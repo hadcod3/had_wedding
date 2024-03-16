@@ -1,7 +1,7 @@
 import CategoryFilter from "@/components/shared/CategoryFilter"
 import Collection from "@/components/shared/Collection"
 import Search from "@/components/shared/Search"
-import { getAllEvents } from "@/lib/actions/package.actions"
+import { getAllPackets } from "@/lib/actions/packet.actions"
 import { SearchParamProps } from "@/types"
 
 const Packages = async ({ searchParams }: SearchParamProps) => {
@@ -9,7 +9,7 @@ const Packages = async ({ searchParams }: SearchParamProps) => {
     const searchText = (searchParams?.query as string) || '';
     const category = (searchParams?.category as string) || '';
     
-    const events = await getAllEvents({
+    const packets = await getAllPackets({
         query: searchText,
         category,
         page,
@@ -19,19 +19,19 @@ const Packages = async ({ searchParams }: SearchParamProps) => {
     return (
         <>
             <section className="wrapper my-8 flex flex-col md:gap-12">
-                <h2 className="h2-bold">Trusted by <br/> Thousands of Events</h2>
+                <h2 className="h2-bold">Trusted by <br/> Thousands of Packet</h2>
                 <div className="flex w-full flex-col gap-5 py-5 md:flex-row">
-                    <Search placeholder="Search Package"/>
+                    <Search placeholder="Search Packets"/>
                     <CategoryFilter/>
                 </div>
                 <Collection
-                data={events?.data}
-                emptyTitle="No Packages Found"
+                data={packets?.data}
+                emptyTitle="No Packets Found"
                 emptyStateSubtext="Check later"
                 collectionType="All_Events"
                 limit={15}
                 page={page}
-                totalPages={events?.totalPages}
+                totalPages={packets?.totalPages}
                 />
             </section>
         </>

@@ -1,13 +1,13 @@
 
 import React, { useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js';
-import { IPackage } from '@/lib/database/models/package.model';
+import { IPacket } from '@/lib/database/models/packet.model';
 import { Button } from '../ui/button';
 import { checkoutOrder } from '@/lib/actions/order.actions';
 
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
-const Checkout = ({ event, userId }: { event: IPackage, userId: string }) => {
+const Checkout = ({ packet, userId }: { packet: IPacket, userId: string }) => {
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -22,10 +22,9 @@ const Checkout = ({ event, userId }: { event: IPackage, userId: string }) => {
 
   const onCheckout = async () => {
     const order = {
-      eventTitle: event.title,
-      eventId: event._id,
-      price: event.price,
-      isFree: event.isFree,
+      packetTitle: packet.title,
+      packetId: packet._id,
+      price: packet.price,
       buyerId: userId
     }
 
@@ -35,7 +34,7 @@ const Checkout = ({ event, userId }: { event: IPackage, userId: string }) => {
   return (
     <form action={onCheckout} method="post">
       <Button type="submit" role="link" size="lg" className="button sm:w-fit">
-        {event.isFree ? 'Get Ticket' : 'Buy Ticket'}
+        Rent Now
       </Button>
     </form>
   )

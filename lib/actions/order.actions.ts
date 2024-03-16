@@ -1,40 +1,40 @@
 "use server"
 
 import Stripe from 'stripe';
-import { CheckoutOrderParams, CreateOrderParams, GetOrdersByEventParams, GetOrdersByUserParams } from "@/types"
+import { CheckoutOrderParams, CreateOrderParams, GetOrdersByPacketParams, GetOrdersByUserParams } from "@/types"
 import { redirect } from 'next/navigation';
 import { handleError } from '../utils';
 import { connectToDatabase } from '../database';
 import Order from '../database/models/order.model';
-import Event from '../database/models/package.model';
+import Packet from '../database/models/packet.model';
 import {ObjectId} from 'mongodb';
 import User from '../database/models/user.model';
 
 export const checkoutOrder = async (order: CheckoutOrderParams) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-  const price = order.isFree ? 0 : Number(order.price) * 100;
+  const price = Number(order.price)
 
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
           price_data: {
-            currency: 'usd',
+            currency: 'idr',
             unit_amount: price,
             product_data: {
-              name: order.eventTitle
+              name: order.packetTitle
             }
           },
           quantity: 1
         },
       ],
       metadata: {
-        eventId: order.eventId,
+        packetId: order.packetId,
         buyerId: order.buyerId,
       },
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
+      success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
       cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
     });
 
@@ -50,7 +50,7 @@ export const createOrder = async (order: CreateOrderParams) => {
     
     const newOrder = await Order.create({
       ...order,
-      event: order.eventId,
+      packet: order.packetId,
       buyer: order.buyerId,
     });
 
@@ -60,13 +60,13 @@ export const createOrder = async (order: CreateOrderParams) => {
   }
 }
 
-// GET ORDERS BY EVENT
-export async function getOrdersByEvent({ searchString, eventId }: GetOrdersByEventParams) {
+// GET ORDERS BY PACKET
+export async function getOrdersByPacket({ searchString, packetId }: GetOrdersByPacketParams) {
   try {
     await connectToDatabase()
 
-    if (!eventId) throw new Error('Event ID is required')
-    const eventObjectId = new ObjectId(eventId)
+    if (!packetId) throw new Error('Packet ID is required')
+    const packetObjectId = new ObjectId(packetId)
 
     const orders = await Order.aggregate([
       {
@@ -74,7 +74,7 @@ export async function getOrdersByEvent({ searchString, eventId }: GetOrdersByEve
           from: 'users',
           localField: 'buyer',
           foreignField: '_id',
-          as: 'buyer',
+          as: 'tenant',
         },
       },
       {
@@ -82,22 +82,22 @@ export async function getOrdersByEvent({ searchString, eventId }: GetOrdersByEve
       },
       {
         $lookup: {
-          from: 'events',
-          localField: 'event',
+          from: 'packets',
+          localField: 'packet',
           foreignField: '_id',
-          as: 'event',
+          as: 'packet',
         },
       },
       {
-        $unwind: '$event',
+        $unwind: '$packet',
       },
       {
         $project: {
           _id: 1,
           totalAmount: 1,
           createdAt: 1,
-          eventTitle: '$event.title',
-          eventId: '$event._id',
+          packetTitle: '$packet.title',
+          packetId: '$packet._id',
           buyer: {
             $concat: ['$buyer.firstName', ' ', '$buyer.lastName'],
           },
@@ -105,7 +105,7 @@ export async function getOrdersByEvent({ searchString, eventId }: GetOrdersByEve
       },
       {
         $match: {
-          $and: [{ eventId: eventObjectId }, { buyer: { $regex: RegExp(searchString, 'i') } }],
+          $and: [{ packetId: packetObjectId }, { buyer: { $regex: RegExp(searchString, 'i') } }],
         },
       },
     ])
@@ -124,14 +124,14 @@ export async function getOrdersByUser({ userId, limit = 3, page }: GetOrdersByUs
     const skipAmount = (Number(page) - 1) * limit
     const conditions = { buyer: userId }
 
-    const orders = await Order.distinct('event._id')
+    const orders = await Order.distinct('packet._id')
       .find(conditions)
       .sort({ createdAt: 'desc' })
       .skip(skipAmount)
       .limit(limit)
       .populate({
-        path: 'event',
-        model: Event,
+        path: 'packets',
+        model: Packet,
         populate: {
           path: 'organizer',
           model: User,
@@ -139,7 +139,7 @@ export async function getOrdersByUser({ userId, limit = 3, page }: GetOrdersByUs
         },
       })
 
-    const ordersCount = await Order.distinct('event._id').countDocuments(conditions)
+    const ordersCount = await Order.distinct('packet._id').countDocuments(conditions)
 
     return { data: JSON.parse(JSON.stringify(orders)), totalPages: Math.ceil(ordersCount / limit) }
   } catch (error) {

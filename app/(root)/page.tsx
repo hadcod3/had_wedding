@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { getAllEvents } from "@/lib/actions/package.actions";
+import { getAllPackets } from "@/lib/actions/packet.actions";
 import { SearchParamProps } from '@/types';
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +10,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
     const searchText = (searchParams?.query as string) || '';
     const category = (searchParams?.category as string) || '';
 
-    const events = await getAllEvents({
+    const events = await getAllPackets({
         query: searchText,
         category,
         page,
@@ -53,7 +53,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
             </section>
 
             <section id="events" className="wrapper my-8 flex flex-col md:gap-12">
-                <h2 className="h2-bold text-center">Trusted by <br/> Thousands of Events</h2>
+                <h2 className="h2-bold text-center">Trusted by <br/> Thousands of Customers</h2>
                 <Collection
                 data={events?.data}
                 emptyTitle="No Events Found"

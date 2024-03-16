@@ -1,6 +1,6 @@
 import Collection from '@/components/shared/Collection'
 import { Button } from '@/components/ui/button'
-import { getEventsByUser } from '@/lib/actions/package.actions'
+import { getEventsByUser } from '@/lib/actions/packet.actions'
 import { getOrdersByUser } from '@/lib/actions/order.actions'
 import { IOrder } from '@/lib/database/models/order.model'
 import { SearchParamProps } from '@/types'
@@ -22,8 +22,18 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
 
   return (
     <>
+        <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
+        <div className="wrapper flex items-center justify-center sm:justify-between">
+            <h3 className='h3-bold text-center sm:text-left'>My Tickets</h3>
+            <Button asChild size="lg" className="button hidden sm:flex">
+            <Link href="/#events">
+                Explore More Events
+            </Link>
+            </Button>
+        </div>
+        </section>
       {/* My Tickets */}
-      <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
+      {/* <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
         <div className="wrapper flex items-center justify-center sm:justify-between">
           <h3 className='h3-bold text-center sm:text-left'>My Tickets</h3>
           <Button asChild size="lg" className="button hidden sm:flex">
@@ -45,10 +55,10 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           urlParamName="ordersPage"
           totalPages={orders?.totalPages}
         />
-      </section>
+      </section> */}
 
       {/* Events Organized */}
-      <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
+      {/* <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
         <div className="wrapper flex items-center justify-center sm:justify-between">
           <h3 className='h3-bold text-center sm:text-left'>Events Organized</h3>
           <Button asChild size="lg" className="button hidden sm:flex">
@@ -70,7 +80,7 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           urlParamName="eventsPage"
           totalPages={organizedEvents?.totalPages}
         />
-      </section>
+      </section> */}
     </>
   )
 }

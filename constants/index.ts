@@ -4,8 +4,8 @@ export const headerLinks = [
       route: '/',
     },
     {
-      label: 'Packages',
-      route: '/packages',
+      label: 'Packets',
+      route: '/packets',
     },
     {
       label: 'Products',
@@ -44,16 +44,14 @@ export const imageList = [
     },
 ]
   
-export const eventDefaultValues = {
+export const packetDefaultValues = {
     title: '',
     description: '',
     location: '',
     imageUrl: '',
-    startDateTime: new Date(),
-    endDateTime: new Date(),
     categoryId: '',
     price: '',
-    isFree: false,
+    isFree: true,
     url: '',
 }
 

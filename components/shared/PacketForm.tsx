@@ -57,7 +57,7 @@ const PacketForm = ({ userId, type, packet, packetId }: PacketFormProps) => {
         const newPacket = await createPacket({
           packet: { ...values, imageUrl: uploadedImageUrl },
           userId,
-          path: '/profile'
+          path: '/packets'
         })
 
         if(newPacket) {

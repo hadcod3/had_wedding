@@ -11,4 +11,4 @@ const ProductCategorySchema = new Schema({
 
 const ProductCategory = models.ProductCategory || model('ProductCategory', ProductCategorySchema);
 
-export default ProductCategory;
+export default ProductCategory; //TODO semua model category dijadikan satu file

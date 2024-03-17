@@ -1,4 +1,5 @@
-import ProductCollection from "@/components/shared/ProductCollection"
+import GearCategoryFilter from "@/components/shared/GearCategoryFilter"
+import GearCollection from "@/components/shared/GearCollection"
 import Search from "@/components/shared/Search"
 import { getAllGears } from "@/lib/actions/gear.action"
 import { SearchParamProps } from "@/types"
@@ -18,15 +19,14 @@ const Gears = async ({ searchParams }: SearchParamProps) => {
     return (
         <>
             <section className="wrapper my-8 flex flex-col md:gap-12">
-                <div className="flex justify-between w-full py-5 flex-col sm:flex-row">
-                    <h2 className="h2-bold">Trusted by <br/> Thousands of customers</h2>
-                    <div className="py-4">
-                        <Search placeholder="Search Product"/>
-                    </div>
+                <h2 className="h2-bold">Trusted by <br/> Thousands of customers</h2>
+                <div className="flex w-full flex-col gap-5 py-5 md:flex-row">
+                    <Search placeholder="Search Product"/>
+                    <GearCategoryFilter/>
                 </div>
-                <ProductCollection
+                <GearCollection
                     data={events?.data}
-                    emptyTitle="No Product Found"
+                    emptyTitle="No Gears Found"
                     emptyStateSubtext="Check later"
                     collectionType="All_Products"
                     limit={15}

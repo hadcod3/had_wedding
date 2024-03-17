@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { productFormSchema } from "@/lib/validator"
+import { gearFormSchema } from "@/lib/validator"
 import * as z from 'zod'
 import { Textarea } from "@/components/ui/textarea"
 import { FileUploader } from "./FileUploader"
@@ -14,35 +14,35 @@ import Image from "next/image"
 import { useUploadThing } from '@/lib/uploadthing'
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation"
-import { IProduct } from "@/lib/database/models/product.model"
-import { createProduct, updateProduct } from "@/lib/actions/product.action"
-import { productDefaultValues } from "@/constants"
+import { IGear } from "@/lib/database/models/gear.model"
+import { createGear, updateGear } from "@/lib/actions/gear.action"
+import { gearDefaultValues } from "@/constants"
 import Dropdown from "./Dropdown"
 
 
-type ProductFormProps = {
+type GearFormProps = {
     type: "Create" | "Update"
-    product?: IProduct
-    productId?: string
+    gear?: IGear
+    gearId?: string
 }
 
-const ProductForm = ({ type, productId, product }: ProductFormProps) => {
+const GearForm = ({ type, gearId, gear }: GearFormProps) => {
     const [files, setFiles] = useState<File[]>([])
-    const initialValues = product && type === 'Update' 
+    const initialValues = gear && type === 'Update' 
       ? { 
-        ...product, 
+        ...gear, 
       }
-      : productDefaultValues;
+      : gearDefaultValues;
     const router = useRouter();
  
     const { startUpload } = useUploadThing('imageUploader')
 
-    const form = useForm<z.infer<typeof productFormSchema>>({
-        resolver: zodResolver(productFormSchema),
+    const form = useForm<z.infer<typeof gearFormSchema>>({
+        resolver: zodResolver(gearFormSchema),
         defaultValues: initialValues
     })
     
-    async function onSubmit(values: z.infer<typeof productFormSchema>) {
+    async function onSubmit(values: z.infer<typeof gearFormSchema>) {
         let uploadedImageUrl = values.imageUrl;
 
         if(files.length > 0) {
@@ -57,15 +57,15 @@ const ProductForm = ({ type, productId, product }: ProductFormProps) => {
 
         if(type === 'Create') {
         try {
-            const newProduct = await createProduct({
-            product: { ...values, imageUrl: uploadedImageUrl },
-            path: '/products'
+            const newGear = await createGear({
+            gear: { ...values, imageUrl: uploadedImageUrl },
+            path: '/gears'
             })
 
-            if(newProduct) {
+            if(newGear) {
             form.reset();
-            // router.push(`/products/${newProduct._id}`)
-            router.push(`/products/create`)
+            // router.push(`/gears/${newGear._id}`)
+            router.push(`/gears/create`)
             }
         } catch (error) {
             console.log(error);
@@ -73,20 +73,20 @@ const ProductForm = ({ type, productId, product }: ProductFormProps) => {
         }
 
         if(type === 'Update') {
-        if(!productId) {
+        if(!gearId) {
             router.back()
             return;
         }
 
         try {
-            const updatedProduct = await updateProduct({
-            product: { ...values, imageUrl: uploadedImageUrl, _id: productId },
-            path: `/products/${productId}`
+            const updatedGear = await updateGear({
+            gear: { ...values, imageUrl: uploadedImageUrl, _id: gearId },
+            path: `/gears/${gearId}`
             })
 
-            if(updatedProduct) {
+            if(updatedGear) {
             form.reset();
-            router.push(`/products/${updatedProduct._id}`)
+            router.push(`/gears/${updatedGear._id}`)
             }
         } catch (error) {
             console.log(error);
@@ -104,7 +104,7 @@ const ProductForm = ({ type, productId, product }: ProductFormProps) => {
                 render={({ field }) => (
                 <FormItem className="w-full">
                     <FormControl>
-                    <Input placeholder="Product Name" {...field} className="input-field" />
+                    <Input placeholder="Gear Name" {...field} className="input-field" />
                     </FormControl>
                     <FormMessage />
                 </FormItem>
@@ -116,7 +116,7 @@ const ProductForm = ({ type, productId, product }: ProductFormProps) => {
                 render={({ field }) => (
                 <FormItem className="w-full">
                     <FormControl>
-                    <Dropdown onChangeHandler={field.onChange} value={field.value} collectionTypes="Product_Categories" />
+                    <Dropdown onChangeHandler={field.onChange} value={field.value} collectionTypes="Gear_Categories" />
                     </FormControl>
                     <FormMessage />
                 </FormItem>
@@ -210,11 +210,11 @@ const ProductForm = ({ type, productId, product }: ProductFormProps) => {
             >
             {form.formState.isSubmitting ? (
                 'Submitting...'
-            ): `${type} Product `}</Button>
+            ): `${type} Gear `}</Button>
             
         </form>
         </Form>
     )
 }
 
-export default ProductForm
+export default GearForm

@@ -132,11 +132,11 @@ export type GetAllProductsParams = {
 export type CreateProductsParams = {
     product: {
         title: string
-        categoryId: string
         description: string
         imageUrl: string
         price: string
         stock: string
+        categoryId: string
     }
     path: string
 }
@@ -144,11 +144,11 @@ export type UpdateProductsParams = {
     product: {
         _id: string
         title: string
-        categoryId: string
         description: string
         imageUrl: string
         price: string
         stock: string
+        categoryId: string
     }
     path: string
 }
@@ -161,11 +161,14 @@ export type GetRelatedProductsByCategoryParams = {
 export type Product = {
     _id: string
     title: string
-    categoryId: string
     description: string
     price: string
     imageUrl: string
     stock: string
+    category: {
+      _id: string
+      name: string
+    }
 }
 
 
@@ -183,6 +186,7 @@ export type CreateGearsParams = {
         imageUrl: string
         price: string
         stock: string
+        categoryId: string
     }
     path: string
 }
@@ -194,6 +198,7 @@ export type UpdateGearsParams = {
         imageUrl: string
         price: string
         stock: string
+        categoryId: string
     }
     path: string
 }
@@ -204,4 +209,8 @@ export type Gear = {
     price: string
     imageUrl: string
     stock: string
+    category: {
+      _id: string
+      name: string
+    }
 }

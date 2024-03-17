@@ -13,7 +13,7 @@ const Packets = async ({ searchParams }: SearchParamProps) => {
         query: searchText,
         category,
         page,
-        limit: 15
+        limit: 15 
     })
 
     return (

@@ -1,5 +1,5 @@
-import ProductForm from "@/components/shared/ProductForm";
-
+import GearForm from "@/components/shared/GearForm";
+ 
 const CreateGear = () => {
 
     return (
@@ -11,7 +11,7 @@ const CreateGear = () => {
             </section>
 
             <div className="wrapper my-8">
-                <ProductForm type="Create"/>
+                <GearForm type="Create"/>
             </div>
         </>
     )

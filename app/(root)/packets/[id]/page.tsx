@@ -1,5 +1,5 @@
 import CheckoutButton from '@/components/shared/CheckoutButton';
-import Collection from '@/components/shared/Collection';
+import Collection from '@/components/shared/PacketCollection';
 import { getPacketById, getRelatedPacketsByCategory } from '@/lib/actions/packet.actions'
 import { SearchParamProps } from '@/types'
 import Image from 'next/image';

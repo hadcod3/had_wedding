@@ -63,5 +63,13 @@ export const productDefaultValues = {
     stock: '',
 }
 
+export const gearDefaultValues = {
+    title: '',
+    description: '',
+    imageUrl: '',
+    price: '',
+    stock: '',
+}
+
 
   

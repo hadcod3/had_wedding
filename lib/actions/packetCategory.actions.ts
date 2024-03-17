@@ -5,7 +5,7 @@ import { handleError } from "../utils"
 import { connectToDatabase } from "../database"
 import PacketCategory from "../database/models/packetCategory.model"
 
-export const createCategory = async ({ packetCategoryName }: CreatePacketCategoryParams) => {
+export const createPacketCategory = async ({ packetCategoryName }: CreatePacketCategoryParams) => {
   try {
     await connectToDatabase();
 

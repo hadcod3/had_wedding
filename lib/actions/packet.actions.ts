@@ -1,13 +1,11 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-
 import { connectToDatabase } from '@/lib/database'
 import Packet from '@/lib/database/models/packet.model'
 import User from '@/lib/database/models/user.model'
 import PacketCategory from '@/lib/database/models/packetCategory.model'
 import { handleError } from '@/lib/utils'
-
 import {
   CreatePacketParams,
   UpdatePacketParams,

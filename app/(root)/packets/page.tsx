@@ -1,10 +1,10 @@
 import PacketCategoryFilter from "@/components/shared/PacketCategoryFilter"
-import Collection from "@/components/shared/Collection"
+import Collection from "@/components/shared/PacketCollection"
 import Search from "@/components/shared/Search"
 import { getAllPackets } from "@/lib/actions/packet.actions"
 import { SearchParamProps } from "@/types"
 
-const Packages = async ({ searchParams }: SearchParamProps) => {
+const Packets = async ({ searchParams }: SearchParamProps) => {
     const page = Number(searchParams?.page) || 1;
     const searchText = (searchParams?.query as string) || '';
     const category = (searchParams?.category as string) || '';
@@ -19,7 +19,7 @@ const Packages = async ({ searchParams }: SearchParamProps) => {
     return (
         <>
             <section className="wrapper my-8 flex flex-col md:gap-12">
-                <h2 className="h2-bold">Trusted by <br/> Thousands of Packet</h2>
+                <h2 className="h2-bold">Trusted by <br/> Thousands of Customers</h2>
                 <div className="flex w-full flex-col gap-5 py-5 md:flex-row">
                     <Search placeholder="Search Packets"/>
                     <PacketCategoryFilter/>
@@ -38,4 +38,4 @@ const Packages = async ({ searchParams }: SearchParamProps) => {
     )
 }
 
-export default Packages
+export default Packets

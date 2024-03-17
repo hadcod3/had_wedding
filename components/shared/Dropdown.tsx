@@ -4,10 +4,9 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-  } from "@/components/ui/select"
-  import { IPacketCategory } from "@/lib/database/models/packetCategory.model"
-  import { startTransition, useEffect, useState } from "react"
-  import {
+} from "@/components/ui/select"
+import { startTransition, useEffect, useState } from "react"
+import {
     AlertDialog,
     AlertDialogAction,
     AlertDialogCancel,
@@ -17,37 +16,73 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
-  } from "@/components/ui/alert-dialog"
-  import { Input } from "../ui/input"
-  import { createCategory, getAllPacketCategories } from "@/lib/actions/category.actions"
-  
-  type DropdownProps = {
+} from "@/components/ui/alert-dialog"
+import { Input } from "../ui/input"
+import { IPacketCategory } from "@/lib/database/models/packetCategory.model"
+import { IProductCategory } from "@/lib/database/models/productCategory.model"
+import { IGearCategory } from "@/lib/database/models/gearCategory.model"
+import { createPacketCategory, getAllPacketCategories } from "@/lib/actions/packetCategory.actions"
+import { createProductCategory, getAllProductCategories } from "@/lib/actions/productCategory.action"
+import { createGearCategory, getAllGearCategories } from "@/lib/actions/gearCategory.action"
+
+type DropdownProps = {
     value?: string
     onChangeHandler?: () => void
-  }
+    collectionTypes?: 'Packet_Categories' | 'Product_Categories' | 'Gear_Categories'
+}
   
-  const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
-    const [categories, setCategories] = useState<IPacketCategory[]>([])
+const Dropdown = ({ value, onChangeHandler, collectionTypes }: DropdownProps) => {
+    const [categories, setCategories] = useState<(IPacketCategory | IProductCategory | IGearCategory)[]>([]);
     const [newCategory, setNewCategory] = useState('');
-  
-    const handleAddCategory = () => {
-      createCategory({
-        packetCategoryName: newCategory.trim()
-      })
-        .then((category) => {
-          setCategories((prevState) => [...prevState, category])
-        })
-    }
-  
+
+    const handleAddCategory = async () => {
+        try {
+          let category: IPacketCategory | IProductCategory | IGearCategory;
+          switch (collectionTypes) {
+            case 'Packet_Categories':
+              category = await createPacketCategory({ packetCategoryName: newCategory.trim() });
+              break;
+            case 'Product_Categories':
+              category = await createProductCategory({ productCategoryName: newCategory.trim() });
+              break;
+            case 'Gear_Categories':
+              category = await createGearCategory({ gearCategoryName: newCategory.trim() });
+              break;
+            default:
+              throw new Error('Invalid collection type');
+          }
+          setCategories(prevState => [...prevState, category]);
+        } catch (error) {
+          console.error('Error adding category:', error);
+        }
+    };
+    
     useEffect(() => {
-      const getCategories = async () => {
-        const categoryList = await getAllPacketCategories();
-  
-        categoryList && setCategories(categoryList as IPacketCategory[])
-      }
-  
-      getCategories();
-    }, [])
+        if (collectionTypes) {
+          const fetchCategories = async () => {
+            try {
+              let categoryList;
+              switch (collectionTypes) {
+                case 'Packet_Categories':
+                  categoryList = await getAllPacketCategories();
+                  break;
+                case 'Product_Categories':
+                  categoryList = await getAllProductCategories();
+                  break;
+                case 'Gear_Categories':
+                  categoryList = await getAllGearCategories();
+                  break;
+                default:
+                  throw new Error('Invalid collection type');
+              }
+              setCategories(categoryList);
+            } catch (error) {
+              console.error('Error fetching categories:', error);
+            }
+          };
+          fetchCategories();
+        }
+      }, [collectionTypes]);
   
     return (
       <Select onValueChange={onChangeHandler} defaultValue={value}>
@@ -72,13 +107,14 @@ import {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={() => startTransition(handleAddCategory)}>Add</AlertDialogAction>
+                <AlertDialogAction onClick={() => startTransition(() => { handleAddCategory(); })}>Add</AlertDialogAction>
+                {/* <AlertDialogAction onClick={() => startTransition(() => handleAddCategory())}>Add</AlertDialogAction> */}
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </SelectContent>
       </Select>
     )
-  }
+}
   
 export default Dropdown

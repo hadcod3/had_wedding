@@ -25,9 +25,8 @@ export type CreatePacketParams = {
       price: string
     }
     path: string
-  }
-  
-  export type UpdatePacketParams = {
+}
+export type UpdatePacketParams = {
     userId: string
     packet: {
       _id: string
@@ -38,34 +37,30 @@ export type CreatePacketParams = {
       price: string
     }
     path: string
-  }
-  
-  export type DeletePacketParams = {
+}
+export type DeletePacketParams = {
     packetId: string
     path: string
-  }
+}
   
-  export type GetAllPacketsParams = {
+export type GetAllPacketsParams = {
     query: string
     category: string
     limit: number
     page: number
-  }
-  
-  export type GetPacketsByUserParams = {
+}
+export type GetPacketsByUserParams = {
     userId: string
     limit?: number
     page: number
-  }
-  
-  export type GetRelatedPacketsByCategoryParams = {
+}
+export type GetRelatedPacketsByCategoryParams = {
     categoryId: string
     packetId: string
     limit?: number
     page: number | string
-  }
-  
-  export type Packet = {
+}
+export type Packet = {
     _id: string
     title: string
     description: string
@@ -75,68 +70,114 @@ export type CreatePacketParams = {
       _id: string
       name: string
     }
-  }
+}
   
-  // ====== CATEGORY PARAMS
-  export type CreatePacketCategoryParams = {
+// ====== CATEGORY PARAMS
+export type CreatePacketCategoryParams = {
     packetCategoryName: string
-  }
-  
-  // ====== ORDER PARAMS
-  export type CheckoutOrderParams = {
+}
+export type CreateProductCategoryParams = {
+    productCategoryName: string
+}
+export type CreateGearCategoryParams = {
+    gearCategoryName: string
+}
+
+// ====== ORDER PARAMS
+export type CheckoutOrderParams = {
     packetTitle: string
     packetId: string
     price: string
     buyerId: string
-  }
-  
-  export type CreateOrderParams = {
+}
+export type CreateOrderParams = {
     stripeId: string
     packetId: string
     buyerId: string
     totalAmount: string
     createdAt: Date
-  }
-  
-  export type GetOrdersByPacketParams = {
+}  
+export type GetOrdersByPacketParams = {
     packetId: string
     searchString: string
-  }
-  
-  export type GetOrdersByUserParams = {
+} 
+export type GetOrdersByUserParams = {
     userId: string | null
     limit?: number
     page: string | number | null
-  }
+}
   
-  // ====== URL QUERY PARAMS
-  export type UrlQueryParams = {
+// ====== URL QUERY PARAMS
+export type UrlQueryParams = {
     params: string
     key: string
     value: string | null
-  }
-  
-  export type RemoveUrlQueryParams = {
+} 
+export type RemoveUrlQueryParams = {
     params: string
     keysToRemove: string[]
-  }
-  
-  export type SearchParamProps = {
+}  
+export type SearchParamProps = {
     params: { id: string }
     searchParams: { [key: string]: string | string[] | undefined }
-  }
+}
 
 // ====== PRODUCT PARAMS
-
 export type GetAllProductsParams = {
     query: string
     category: string
     limit: number
     page: number
 }
-
 export type CreateProductsParams = {
     product: {
+        title: string
+        categoryId: string
+        description: string
+        imageUrl: string
+        price: string
+        stock: string
+    }
+    path: string
+}
+export type UpdateProductsParams = {
+    product: {
+        _id: string
+        title: string
+        categoryId: string
+        description: string
+        imageUrl: string
+        price: string
+        stock: string
+    }
+    path: string
+}
+export type GetRelatedProductsByCategoryParams = {
+    categoryId: string
+    productId: string
+    limit?: number
+    page: number | string
+}
+export type Product = {
+    _id: string
+    title: string
+    categoryId: string
+    description: string
+    price: string
+    imageUrl: string
+    stock: string
+}
+
+
+// ====== GEAR PARAMS
+export type GetAllGearsParams = {
+    query: string
+    category: string
+    limit: number
+    page: number
+}
+export type CreateGearsParams = {
+    gear: {
         title: string
         description: string
         imageUrl: string
@@ -145,9 +186,8 @@ export type CreateProductsParams = {
     }
     path: string
 }
-
-export type UpdateProductsParams = {
-    product: {
+export type UpdateGearsParams = {
+    gear: {
         _id: string
         title: string
         description: string
@@ -157,8 +197,7 @@ export type UpdateProductsParams = {
     }
     path: string
 }
-
-export type Product = {
+export type Gear = {
     _id: string
     title: string
     description: string

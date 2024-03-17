@@ -12,18 +12,18 @@ import { FileUploader } from "./FileUploader"
 import { useState } from "react"
 import Image from "next/image"
 import { useUploadThing } from '@/lib/uploadthing'
-
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation"
 import { IProduct } from "@/lib/database/models/product.model"
 import { createProduct, updateProduct } from "@/lib/actions/product.action"
 import { productDefaultValues } from "@/constants"
+import Dropdown from "./Dropdown"
 
 
 type ProductFormProps = {
     type: "Create" | "Update"
-    productId?: string
     product?: IProduct
+    productId?: string
 }
 
 const ProductForm = ({ type, productId, product }: ProductFormProps) => {
@@ -34,7 +34,7 @@ const ProductForm = ({ type, productId, product }: ProductFormProps) => {
       }
       : productDefaultValues;
     const router = useRouter();
-
+ 
     const { startUpload } = useUploadThing('imageUploader')
 
     const form = useForm<z.infer<typeof productFormSchema>>({
@@ -64,7 +64,7 @@ const ProductForm = ({ type, productId, product }: ProductFormProps) => {
 
             if(newProduct) {
             form.reset();
-            // router.push(`/products/${newProduct._id}`)
+            router.push(`/products/${newProduct._id}`)
             router.push(`/`)
             }
         } catch (error) {
@@ -110,18 +110,18 @@ const ProductForm = ({ type, productId, product }: ProductFormProps) => {
                 </FormItem>
                 )}
             />
-            {/* <FormField
+            <FormField
                 control={form.control}
                 name="categoryId"
                 render={({ field }) => (
                 <FormItem className="w-full">
                     <FormControl>
-                    <Dropdown onChangeHandler={field.onChange} value={field.value} />
+                    <Dropdown onChangeHandler={field.onChange} value={field.value} collectionTypes="Product_Categories" />
                     </FormControl>
                     <FormMessage />
                 </FormItem>
                 )}
-            /> */}
+            />
             </div>
 
             <div className="flex flex-col gap-5 md:flex-row">

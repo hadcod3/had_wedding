@@ -5,13 +5,13 @@ import { revalidatePath } from 'next/cache'
 import { connectToDatabase } from '@/lib/database'  
 import Category from '@/lib/database/models/packetCategory.model'
 import { handleError } from '@/lib/utils'
-import { CreateProductsParams, GetAllProductsParams, UpdateProductsParams } from '@/types'
+import { CreateProductsParams, GetAllProductsParams, GetRelatedProductsByCategoryParams, UpdateProductsParams } from '@/types'
 import Product from '../database/models/product.model'
 import User from '../database/models/user.model'
 
 const getCategoryByName = async (name: string) => {
     return Category.findOne({ name: { $regex: name, $options: 'i' } })
-}
+} 
 
 const populateProduct = (query: any) => {
     return query
@@ -22,7 +22,7 @@ export async function createProduct({ product, path }: CreateProductsParams) {
     try {
       await connectToDatabase()
   
-      const newProduct = await Product.create({ ...product, path })
+      const newProduct = await Product.create({ ...product, category: product.categoryId, path })
       revalidatePath(path)
   
       return JSON.parse(JSON.stringify(newProduct))
@@ -38,7 +38,7 @@ export async function updateProduct({ product, path }: UpdateProductsParams) {
   
       const updatedProduct = await Product.findByIdAndUpdate(
         product._id,
-        { ...product, path },
+        { ...product, path, category: product.categoryId },
         { new: true }
       )
       revalidatePath(path)
@@ -91,5 +91,32 @@ export async function getAllProducts({ query, limit = 6, category, page }: GetAl
     } catch (error) {
       handleError(error)
     }
-  }
+}
+
+// GET RELATED PRODUCT: PRODUCT WITH SAME CATEGORY
+export async function getRelatedProductsByCategory({
+    categoryId,
+    productId,
+    limit = 3,
+    page = 1,
+  }: GetRelatedProductsByCategoryParams) {
+    try {
+      await connectToDatabase()
   
+      const skipAmount = (Number(page) - 1) * limit
+      const conditions = { $and: [{ category: categoryId }, { _id: { $ne: productId } }] }
+  
+      const productsQuery = Product.find(conditions)
+        .sort({ createdAt: 'desc' })
+        .skip(skipAmount)
+        .limit(limit)
+  
+      const product = await populateProduct(productsQuery)
+      const productCount = await Product.countDocuments(conditions)
+  
+      return { data: JSON.parse(JSON.stringify(product)), totalPages: Math.ceil(productCount / limit) }
+    } catch (error) {
+      handleError(error)
+    }
+  }
+    

@@ -45,7 +45,7 @@ const Collection = ({
 
           { collectionType === 'Sample_Packages' && (
                 <Button size="lg" asChild className="button w-full sm:w-fit">
-                    <Link href="/packets">See More Packages</Link>
+                    <Link href="/packets">See More Packets</Link>
                 </Button>
           )}
         </div>

@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { getAllPacketCategories } from "@/lib/actions/category.actions";
+import { getAllPacketCategories } from "@/lib/actions/packetCategory.actions";
 import { IPacketCategory } from "@/lib/database/models/packetCategory.model";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";

@@ -115,7 +115,7 @@ const PacketForm = ({ userId, type, packet, packetId }: PacketFormProps) => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Dropdown onChangeHandler={field.onChange} value={field.value} />
+                  <Dropdown onChangeHandler={field.onChange} value={field.value} collectionTypes="Product_Categories" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

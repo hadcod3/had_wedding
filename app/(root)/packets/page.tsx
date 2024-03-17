@@ -3,7 +3,7 @@ import Collection from "@/components/shared/PacketCollection"
 import Search from "@/components/shared/Search"
 import { getAllPackets } from "@/lib/actions/packet.actions"
 import { SearchParamProps } from "@/types"
-
+ 
 const Packets = async ({ searchParams }: SearchParamProps) => {
     const page = Number(searchParams?.page) || 1;
     const searchText = (searchParams?.query as string) || '';

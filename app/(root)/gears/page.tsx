@@ -9,7 +9,7 @@ const Gears = async ({ searchParams }: SearchParamProps) => {
     const searchText = (searchParams?.query as string) || '';
     const category = (searchParams?.category as string) || '';
     
-    const events = await getAllGears({
+    const gears = await getAllGears({
         query: searchText,
         category,
         page,
@@ -25,13 +25,13 @@ const Gears = async ({ searchParams }: SearchParamProps) => {
                     <GearCategoryFilter/>
                 </div>
                 <GearCollection
-                    data={events?.data}
+                    data={gears?.data}
                     emptyTitle="No Gears Found"
                     emptyStateSubtext="Check later"
                     collectionType="All_Products"
                     limit={15}
                     page={page}
-                    totalPages={events?.totalPages}
+                    totalPages={gears?.totalPages}
                 />
             </section>
             </>

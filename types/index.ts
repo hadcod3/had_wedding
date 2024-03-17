@@ -176,8 +176,8 @@ export type CreateGearsParams = {
         description: string
         imageUrl: string
         price: string
-        categoryId: string
         stock: string
+        categoryId: string
     }
     path: string
 }
@@ -191,6 +191,10 @@ export type UpdateGearsParams = {
         price: string
         stock: string
     }
+    path: string
+}
+export type DeleteGearParams = {
+    productId: string
     path: string
 }
 export type GetAllGearsParams = {

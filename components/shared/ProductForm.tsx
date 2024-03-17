@@ -65,7 +65,7 @@ const ProductForm = ({ type, productId, product }: ProductFormProps) => {
             if(newProduct) {
             form.reset();
             // router.push(`/products/${newProduct._id}`)
-            router.push(`/products/create`)
+            router.push(`/products/create`)//TODO remove this later
             }
         } catch (error) {
             console.log(error);

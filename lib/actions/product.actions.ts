@@ -4,10 +4,14 @@ import { revalidatePath } from 'next/cache'
 
 import { connectToDatabase } from '@/lib/database'  
 import { ProductCategory } from '@/lib/database/models/category.model'
-import { handleError } from '@/lib/utils'
-import { CreateProductsParams, GetAllProductsParams, GetRelatedProductsByCategoryParams, UpdateProductsParams } from '@/types'
 import Product from '../database/models/product.model'
-import User from '../database/models/user.model'
+import { handleError } from '@/lib/utils'
+import { 
+    CreateProductsParams, 
+    GetAllProductsParams, 
+    GetRelatedProductsByCategoryParams, 
+    UpdateProductsParams 
+} from '@/types'
 
 const getCategoryByName = async (name: string) => {
     return ProductCategory.findOne({ name: { $regex: name, $options: 'i' } })

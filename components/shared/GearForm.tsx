@@ -65,7 +65,7 @@ const GearForm = ({ type, gearId, gear }: GearFormProps) => {
             if(newGear) {
             form.reset();
             // router.push(`/gears/${newGear._id}`)
-            router.push(`/gears/create`)
+            router.push(`/gears/create`)//TODO remove this later
             }
         } catch (error) {
             console.log(error);

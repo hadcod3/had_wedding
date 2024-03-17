@@ -5,7 +5,11 @@ import { connectToDatabase } from '@/lib/database'
 import Gear from '../database/models/gear.model'
 import { GearCategory } from '@/lib/database/models/category.model'
 import { handleError } from '@/lib/utils'
-import { CreateGearsParams, GetAllGearsParams, UpdateGearsParams } from '@/types'
+import { 
+    CreateGearsParams, 
+    GetAllGearsParams, 
+    UpdateGearsParams 
+} from '@/types'
 
 const getCategoryByName = async (name: string) => {
     return GearCategory.findOne({ name: { $regex: name, $options: 'i' } })
@@ -20,7 +24,7 @@ export async function createGear({ gear, path }: CreateGearsParams) {
     try {
       await connectToDatabase()
   
-      const newGear = await Gear.create({ ...gear, path })
+      const newGear = await Gear.create({ ...gear, category: gear.categoryId, path })
       revalidatePath(path)
   
       return JSON.parse(JSON.stringify(newGear))
@@ -36,7 +40,7 @@ export async function updateGear({ gear, path }: UpdateGearsParams) {
   
       const updatedGear = await Gear.findByIdAndUpdate(
         gear._id,
-        { ...gear, path },
+        { ...gear, path, category: gear.categoryId },
         { new: true }
       )
       revalidatePath(path)

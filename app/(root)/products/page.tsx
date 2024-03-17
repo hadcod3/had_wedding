@@ -3,7 +3,7 @@ import ProductCollection from "@/components/shared/ProductCollection"
 import Search from "@/components/shared/Search"
 import { getAllProducts } from "@/lib/actions/product.actions"
 import { SearchParamProps } from "@/types"
-
+ 
 const Products = async ({ searchParams }: SearchParamProps) => {
     const page = Number(searchParams?.page) || 1;
     const searchText = (searchParams?.query as string) || '';

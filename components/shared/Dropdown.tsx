@@ -22,8 +22,8 @@ import { IPacketCategory } from "@/lib/database/models/packetCategory.model"
 import { IProductCategory } from "@/lib/database/models/productCategory.model"
 import { IGearCategory } from "@/lib/database/models/gearCategory.model"
 import { createPacketCategory, getAllPacketCategories } from "@/lib/actions/packetCategory.actions"
-import { createProductCategory, getAllProductCategories } from "@/lib/actions/productCategory.action"
-import { createGearCategory, getAllGearCategories } from "@/lib/actions/gearCategory.action"
+import { createProductCategory, getAllProductCategories } from "@/lib/actions/productCategory.actions"
+import { createGearCategory, getAllGearCategories } from "@/lib/actions/gearCategory.actions"
 
 type DropdownProps = {
     value?: string

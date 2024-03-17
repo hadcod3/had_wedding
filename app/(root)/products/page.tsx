@@ -1,4 +1,4 @@
-
+import ProductCategoryFilter from "@/components/shared/ProductCategoryFilter"
 import ProductCollection from "@/components/shared/ProductCollection"
 import Search from "@/components/shared/Search"
 import { getAllProducts } from "@/lib/actions/product.action"
@@ -23,6 +23,7 @@ const Products = async ({ searchParams }: SearchParamProps) => {
                     <h2 className="h2-bold">Trusted by <br/> Thousands of customers</h2>
                     <div className="py-4">
                         <Search placeholder="Search Product"/>
+                        <ProductCategoryFilter/>
                     </div>
                 </div>
                 <ProductCollection

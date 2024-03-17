@@ -14,7 +14,6 @@ import { FileUploader } from "./FileUploader"
 import { useState } from "react"
 import Image from "next/image"
 import { useUploadThing } from '@/lib/uploadthing'
-
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation"
 import { createPacket, updatePacket } from "@/lib/actions/packet.actions"
@@ -115,7 +114,7 @@ const PacketForm = ({ userId, type, packet, packetId }: PacketFormProps) => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Dropdown onChangeHandler={field.onChange} value={field.value} collectionTypes="Product_Categories" />
+                  <Dropdown onChangeHandler={field.onChange} value={field.value} collectionTypes="Packet_Categories" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

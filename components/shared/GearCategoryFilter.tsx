@@ -1,5 +1,5 @@
 "use client"
-
+ 
 import {
   Select,
   SelectContent,
@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { getAllGearCategories } from "@/lib/actions/gearCategory.actions";
-import { IGearCategory } from "@/lib/database/models/gearCategory.model";
+import { IGearCategory } from "@/lib/database/models/category.model";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

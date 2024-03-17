@@ -13,64 +13,6 @@ export type UpdateUserParams = {
     username: string
     photo: string
 }
-
-// ====== PACKET PARAMS
-export type CreatePacketParams = {
-    userId: string
-    packet: {
-      title: string
-      description: string
-      imageUrl: string
-      categoryId: string
-      price: string
-    }
-    path: string
-}
-export type UpdatePacketParams = {
-    userId: string
-    packet: {
-      _id: string
-      title: string
-      imageUrl: string
-      description: string
-      categoryId: string
-      price: string
-    }
-    path: string
-}
-export type DeletePacketParams = {
-    packetId: string
-    path: string
-}
-  
-export type GetAllPacketsParams = {
-    query: string
-    category: string
-    limit: number
-    page: number
-}
-export type GetPacketsByUserParams = {
-    userId: string
-    limit?: number
-    page: number
-}
-export type GetRelatedPacketsByCategoryParams = {
-    categoryId: string
-    packetId: string
-    limit?: number
-    page: number | string
-}
-export type Packet = {
-    _id: string
-    title: string
-    description: string
-    price: string
-    imageUrl: string
-    category: {
-      _id: string
-      name: string
-    }
-}
   
 // ====== CATEGORY PARAMS
 export type CreatePacketCategoryParams = {
@@ -122,13 +64,59 @@ export type SearchParamProps = {
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
-// ====== PRODUCT PARAMS
-export type GetAllProductsParams = {
+// ====== PACKET PARAMS
+export type CreatePacketParams = {
+    userId: string
+    packet: {
+      title: string
+      description: string
+      imageUrl: string
+      price: string
+      categoryId: string
+    }
+    path: string
+}
+export type UpdatePacketParams = {
+    userId: string
+    packet: {
+      _id: string
+      title: string
+      imageUrl: string
+      description: string
+      categoryId: string
+      price: string
+    }
+    path: string
+}
+export type DeletePacketParams = {
+    packetId: string
+    path: string
+}
+export type GetAllPacketsParams = {
     query: string
     category: string
     limit: number
     page: number
 }
+export type GetRelatedPacketsByCategoryParams = {
+    categoryId: string
+    packetId: string
+    limit?: number
+    page: number | string
+}
+export type Packet = {
+    _id: string
+    title: string
+    description: string
+    price: string
+    imageUrl: string
+    category: {
+      _id: string
+      name: string
+    }
+}
+
+// ====== PRODUCT PARAMS
 export type CreateProductsParams = {
     product: {
         title: string
@@ -144,13 +132,23 @@ export type UpdateProductsParams = {
     product: {
         _id: string
         title: string
-        description: string
         imageUrl: string
+        description: string
+        categoryId: string
         price: string
         stock: string
-        categoryId: string
     }
     path: string
+}
+export type DeleteProductParams = {
+    productId: string
+    path: string
+}
+export type GetAllProductsParams = {
+    query: string
+    category: string
+    limit: number
+    page: number
 }
 export type GetRelatedProductsByCategoryParams = {
     categoryId: string
@@ -171,22 +169,15 @@ export type Product = {
     }
 }
 
-
 // ====== GEAR PARAMS
-export type GetAllGearsParams = {
-    query: string
-    category: string
-    limit: number
-    page: number
-}
 export type CreateGearsParams = {
     gear: {
         title: string
         description: string
         imageUrl: string
         price: string
-        stock: string
         categoryId: string
+        stock: string
     }
     path: string
 }
@@ -194,13 +185,19 @@ export type UpdateGearsParams = {
     gear: {
         _id: string
         title: string
-        description: string
         imageUrl: string
+        description: string
+        categoryId: string
         price: string
         stock: string
-        categoryId: string
     }
     path: string
+}
+export type GetAllGearsParams = {
+    query: string
+    category: string
+    limit: number
+    page: number
 }
 export type Gear = {
     _id: string

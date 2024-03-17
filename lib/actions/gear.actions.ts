@@ -2,10 +2,10 @@
 
 import { revalidatePath } from 'next/cache'
 import { connectToDatabase } from '@/lib/database'  
-import GearCategory from '@/lib/database/models/gearCategory.model'
+import Gear from '../database/models/gear.model'
+import { GearCategory } from '@/lib/database/models/category.model'
 import { handleError } from '@/lib/utils'
 import { CreateGearsParams, GetAllGearsParams, UpdateGearsParams } from '@/types'
-import Gear from '../database/models/gear.model'
 
 const getCategoryByName = async (name: string) => {
     return GearCategory.findOne({ name: { $regex: name, $options: 'i' } })

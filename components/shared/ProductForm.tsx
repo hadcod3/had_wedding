@@ -15,7 +15,7 @@ import { useUploadThing } from '@/lib/uploadthing'
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation"
 import { IProduct } from "@/lib/database/models/product.model"
-import { createProduct, updateProduct } from "@/lib/actions/product.action"
+import { createProduct, updateProduct } from "@/lib/actions/product.actions"
 import { productDefaultValues } from "@/constants"
 import Dropdown from "./Dropdown"
 

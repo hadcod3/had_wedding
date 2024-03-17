@@ -3,7 +3,7 @@
 import { CreatePacketCategoryParams } from "@/types"
 import { handleError } from "../utils"
 import { connectToDatabase } from "../database"
-import PacketCategory from "../database/models/packetCategory.model"
+import { PacketCategory } from "../database/models/category.model"
 
 export const createPacketCategory = async ({ packetCategoryName }: CreatePacketCategoryParams) => {
   try {

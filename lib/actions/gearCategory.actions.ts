@@ -3,7 +3,7 @@
 import { CreateGearCategoryParams } from "@/types"
 import { handleError } from "../utils"
 import { connectToDatabase } from "../database"
-import GearCategory from "../database/models/gearCategory.model"
+import { GearCategory } from "../database/models/category.model"
 
 export const createGearCategory = async ({ gearCategoryName }: CreateGearCategoryParams) => {
   try {

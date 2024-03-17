@@ -1,5 +1,5 @@
 import CheckoutButton from '@/components/shared/CheckoutButton';
-import { getGearById } from '@/lib/actions/gear.action';
+import { getGearById } from '@/lib/actions/gear.actions';
 import { SearchParamProps } from '@/types'
 import Image from 'next/image';
 

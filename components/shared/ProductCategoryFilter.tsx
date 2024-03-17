@@ -8,12 +8,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { getAllProductCategories } from "@/lib/actions/productCategory.actions";
-import { IProductCategory } from "@/lib/database/models/productCategory.model";
+import { IProductCategory } from "@/lib/database/models/category.model";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const PacketCategoryFilter = () => {
+const ProductCategoryFilter = () => {
   const [categories, setCategories] = useState<IProductCategory[]>([]);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -65,4 +65,4 @@ const PacketCategoryFilter = () => {
   )
 }
 
-export default PacketCategoryFilter
+export default ProductCategoryFilter

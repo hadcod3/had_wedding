@@ -1,9 +1,9 @@
 import GearCategoryFilter from "@/components/shared/GearCategoryFilter"
 import GearCollection from "@/components/shared/GearCollection"
 import Search from "@/components/shared/Search"
-import { getAllGears } from "@/lib/actions/gear.action"
+import { getAllGears } from "@/lib/actions/gear.actions"
 import { SearchParamProps } from "@/types"
-
+ 
 const Gears = async ({ searchParams }: SearchParamProps) => {
     const page = Number(searchParams?.page) || 1;
     const searchText = (searchParams?.query as string) || '';

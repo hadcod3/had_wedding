@@ -1,7 +1,7 @@
 import ProductCategoryFilter from "@/components/shared/ProductCategoryFilter"
 import ProductCollection from "@/components/shared/ProductCollection"
 import Search from "@/components/shared/Search"
-import { getAllProducts } from "@/lib/actions/product.action"
+import { getAllProducts } from "@/lib/actions/product.actions"
 import { SearchParamProps } from "@/types"
 
 const Products = async ({ searchParams }: SearchParamProps) => {
@@ -9,7 +9,7 @@ const Products = async ({ searchParams }: SearchParamProps) => {
     const searchText = (searchParams?.query as string) || '';
     const category = (searchParams?.category as string) || '';
     
-    const events = await getAllProducts({
+    const product = await getAllProducts({
         query: searchText,
         category,
         page,
@@ -25,13 +25,13 @@ const Products = async ({ searchParams }: SearchParamProps) => {
                     <ProductCategoryFilter/>
                 </div>
                 <ProductCollection
-                    data={events?.data}
+                    data={product?.data}
                     emptyTitle="No Product Found"
                     emptyStateSubtext="Check later"
                     collectionType="All_Products"
                     limit={15}
                     page={page}
-                    totalPages={events?.totalPages}
+                    totalPages={product?.totalPages}
                 />
             </section>
         </>

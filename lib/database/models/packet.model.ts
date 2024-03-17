@@ -1,6 +1,6 @@
 import { Document, Schema, model, models } from "mongoose";
 
-export interface IPacket extends Document {
+export interface IPacket extends Document { 
     _id: string;
     title: string;
     description?: string;

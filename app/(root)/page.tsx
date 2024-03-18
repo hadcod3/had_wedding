@@ -4,6 +4,9 @@ import { SearchParamProps } from '@/types';
 import Image from "next/image";
 import Link from "next/link";
 import Collection from "@/components/shared/PacketCollection";
+import ProductCollection from "@/components/shared/ProductCollection";
+import { getAllProducts } from "@/lib/actions/product.actions";
+import { getAllGears } from "@/lib/actions/gear.actions";
 
 export default async function Home({ searchParams }: SearchParamProps) {
     const page = Number(searchParams?.page) || 1;
@@ -15,6 +18,18 @@ export default async function Home({ searchParams }: SearchParamProps) {
         category,
         page,
         limit: 3
+    })
+    const products = await getAllProducts({
+        query: searchText,
+        category,
+        page,
+        limit: 5
+    })
+    const gears = await getAllGears({
+        query: searchText,
+        category,
+        page,
+        limit: 5
     })
 
     return (
@@ -128,6 +143,19 @@ export default async function Home({ searchParams }: SearchParamProps) {
                         <div className="text-base leading-5 text-center">tips & tricks</div>
                     </div>
                 </div>
+            </section>
+
+            <section className="wrapper my-8 flex flex-col md:gap-12">
+                <h2 className="h2-bold text-center">Support by<br/>our best products</h2>
+                <ProductCollection
+                data={products?.data}
+                emptyTitle="No Products Found"
+                emptyStateSubtext="Check later"
+                collectionType="Sample_Products"
+                limit={3}
+                page={page}
+                totalPages={products?.totalPages}
+                />
             </section>
 
             <section className="flex items-end justify-center bg-gray-200">

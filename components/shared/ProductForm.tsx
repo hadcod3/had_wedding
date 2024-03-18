@@ -19,7 +19,7 @@ import { createProduct, updateProduct } from "@/lib/actions/product.actions"
 import { productDefaultValues } from "@/constants"
 import Dropdown from "./Dropdown"
 
-
+//TODO combine with gear form
 type ProductFormProps = {
     type: "Create" | "Update"
     product?: IProduct

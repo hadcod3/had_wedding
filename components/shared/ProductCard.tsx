@@ -8,7 +8,6 @@ type CardProps = {
 
 const ProductCard = ({ event }: CardProps) => {
     
-    console.log(event.title)
     return (
         <div className="relative flex min-h-[270px] w-[180px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg ">
         <Link 

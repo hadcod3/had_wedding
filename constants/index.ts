@@ -21,6 +21,29 @@ export const headerLinks = [
     },
 ]
 
+export const faqList = [
+    {
+        index: 'item-1',
+        quest: 'it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout?',
+        answer: 'it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+    },
+    {
+        index: 'item-2',
+        quest: 'it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout?',
+        answer: 'it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+    },
+    {
+        index: 'item-3',
+        quest: 'it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout?',
+        answer: 'it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+    },
+    {
+        index: 'item-4',
+        quest: 'it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout?',
+        answer: 'it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+    },
+]
+
 export const imageList = [
     {
         alt: 'image-1',

@@ -1,5 +1,9 @@
 import { Document, Schema, model, models } from "mongoose";
 
+export interface ICategory {
+    _id: string;
+    name: string;
+}
 export interface IGear extends Document {
     _id: string;
     title: string;
@@ -8,7 +12,7 @@ export interface IGear extends Document {
     imageUrl: string;
     price: string;
     stock: string;
-    category: { _id: string, name: string };
+    category: ICategory;
 }
 
 const GearSchema = new Schema({

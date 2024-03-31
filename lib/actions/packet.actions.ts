@@ -23,14 +23,11 @@ const populatePacket = (query: any) => {
 }
 
 // CREATE
-export async function createPacket({ userId, packet, path }: CreatePacketParams) {
+export async function createPacket({ packet, path }: CreatePacketParams) {
   try {
     await connectToDatabase()
 
-    const organizer = await User.findById(userId)
-    if (!organizer) throw new Error('Organizer not found')
-
-    const newPacket = await Packet.create({ ...packet, category: packet.categoryId, organizer: userId })
+    const newPacket = await Packet.create({ ...packet, category: packet.categoryId })
     revalidatePath(path)
 
     return JSON.parse(JSON.stringify(newPacket))
@@ -55,14 +52,9 @@ export async function getPacketById(packetId: string) {
 }
 
 // UPDATE
-export async function updatePacket({ userId, packet, path }: UpdatePacketParams) {
+export async function updatePacket({ packet, path }: UpdatePacketParams) {
   try {
     await connectToDatabase()
-
-    const packetToUpdate = await Packet.findById(packet._id)
-    if (!packetToUpdate || packetToUpdate.organizer.toHexString() !== userId) {
-      throw new Error('Unauthorized or packet not found')
-    }
 
     const updatedPacket = await Packet.findByIdAndUpdate(
       packet._id,

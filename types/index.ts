@@ -27,16 +27,17 @@ export type CreateGearCategoryParams = {
 
 // ====== ORDER PARAMS
 export type CheckoutOrderParams = {
-    packetTitle: string
-    packetId: string
-    price: string
+    itemId: string
+    itemTitle: string
+    price: number
     buyerId: string
 }
 export type CreateOrderParams = {
     stripeId: string
-    packetId: string
+    itemId: string
+    // itemTitle: string
     buyerId: string
-    totalAmount: string
+    totalPrice: string
     createdAt: Date
 }  
 export type GetOrdersByPacketParams = {
@@ -66,7 +67,6 @@ export type SearchParamProps = {
 
 // ====== PACKET PARAMS
 export type CreatePacketParams = {
-    userId: string
     packet: {
       title: string
       description: string
@@ -77,7 +77,6 @@ export type CreatePacketParams = {
     path: string
 }
 export type UpdatePacketParams = {
-    userId: string
     packet: {
       _id: string
       title: string

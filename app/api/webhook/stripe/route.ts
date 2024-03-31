@@ -24,11 +24,12 @@ export async function POST(request: Request) {
     const { id, amount_total, metadata } = event.data.object
 
     const order = {
-      stripeId: id,
-      packetId: metadata?.packetId || '',
-      buyerId: metadata?.buyerId || '',
-      totalAmount: amount_total ? (amount_total / 100).toString() : '0',
-      createdAt: new Date(),
+        stripeId: id,
+        itemId: metadata?.itemId || '',
+        // itemTitle: metadata?.itemTitle || '',
+        buyerId: metadata?.buyerId || '',
+        totalPrice: amount_total ? (amount_total / 100).toString() : '0',
+        createdAt: new Date(),
     }
 
     const newOrder = await createOrder(order)

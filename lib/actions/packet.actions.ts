@@ -19,8 +19,7 @@ const getCategoryByName = async (name: string) => {
 }
 
 const populatePacket = (query: any) => {
-  return query
-    .populate({ path: 'category', model: PacketCategory, select: '_id name' })
+  return query.populate({ path: 'category', model: PacketCategory, select: '_id name' })
 }
 
 // CREATE

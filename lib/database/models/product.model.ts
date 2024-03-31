@@ -1,9 +1,5 @@
 import { Document, Schema, model, models } from "mongoose";
 
-export interface ICategory {
-    _id: string;
-    name: string;
-}
 export interface IProduct extends Document {
     _id: string;
     title: string;
@@ -12,7 +8,7 @@ export interface IProduct extends Document {
     imageUrl: string;
     price: string;
     stock: string;
-    category: ICategory;
+    category: { _id: string, name: string};
 }
 
 const ProductSchema = new Schema({

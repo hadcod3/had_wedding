@@ -1,9 +1,5 @@
 import { Document, Schema, model, models } from "mongoose";
 
-export interface ICategory {
-    _id: string;
-    name: string;
-}
 export interface IPacket extends Document { 
     _id: string;
     title: string;
@@ -11,7 +7,7 @@ export interface IPacket extends Document {
     createdAt: Date;
     imageUrl: string;
     price: string;
-    category: ICategory;
+    category: { _id: string, name: string};
 }
 
 const PacketSchema = new Schema({

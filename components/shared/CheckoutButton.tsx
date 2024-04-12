@@ -27,26 +27,26 @@ const CheckoutButton = (
     return (
         <div className="flex items-center gap-3">
             <>
-            <SignedOut>
-                <Button asChild className="button rounded-full" size="lg">
-                    <Link href="/sign-in">
-                        Sign in
-                    </Link>
-                </Button>
-            </SignedOut>
+                <SignedOut>
+                    <Button asChild className="button rounded-full" size="lg">
+                        <Link href="/sign-in">
+                            Sign in
+                        </Link>
+                    </Button>
+                </SignedOut>
 
-            <SignedIn>
-                <Checkout value={value} userId={userId} />
-                {buttonType === 'Packet' && (
-                    <Checkout value={value as IPacket} userId={userId} />
-                )}
-                {buttonType === 'Product' && (
-                    <Checkout value={value as IProduct} userId={userId} />
-                )}
-                {buttonType === 'Gear' && (
-                    <Checkout value={value as IGear} userId={userId} />
-                )}
-            </SignedIn>
+                <SignedIn>
+                    {/* <Checkout value={value} userId={userId} /> */}
+                    {buttonType === 'Packet' && (
+                        <Checkout value={value as IPacket} userId={userId} />
+                    )}
+                    {buttonType === 'Product' && (
+                        <Checkout value={value as IProduct} userId={userId} />
+                    )}
+                    {buttonType === 'Gear' && (
+                        <Checkout value={value as IGear} userId={userId} />
+                    )}
+                </SignedIn>
             </>
         </div>
     )

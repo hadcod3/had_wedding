@@ -13,7 +13,7 @@ const OrderSchema = new Schema({
     totalAmount: {
       type: String,
     },
-    event: {
+    item: {
     //   type: Schema.Types.ObjectId,
     //   ref: 'Packet',
         type: String

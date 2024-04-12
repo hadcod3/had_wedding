@@ -26,16 +26,29 @@ export type CreateGearCategoryParams = {
 }
 
 // ====== ORDER PARAMS
+// export type CheckoutOrderParams = {
+//     eventTitle: string
+//     eventId: string
+//     price: string
+//     buyerId: string
+//   }
 export type CheckoutOrderParams = {
-    eventTitle: string
-    eventId: string
+    itemTitle: string
+    itemId: string
     price: string
     buyerId: string
   }
   
+//   export type CreateOrderParams = {
+//     stripeId: string
+//     eventId: string
+//     buyerId: string
+//     totalAmount: string
+//     createdAt: Date
+//   }
   export type CreateOrderParams = {
     stripeId: string
-    eventId: string
+    itemId: string
     buyerId: string
     totalAmount: string
     createdAt: Date

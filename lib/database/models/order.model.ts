@@ -14,8 +14,9 @@ const OrderSchema = new Schema({
       type: String,
     },
     event: {
-      type: Schema.Types.ObjectId,
-      ref: 'Packet',
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'Packet',
+        type: String
     },
     buyer: {
       type: Schema.Types.ObjectId,

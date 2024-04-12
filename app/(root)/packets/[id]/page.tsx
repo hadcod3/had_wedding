@@ -40,7 +40,7 @@ const PackageDetails = async ({ params: { id }, searchParams }: SearchParamProps
                         </div>
                     </div>
 
-                <CheckoutButton packet={packet} />
+                <CheckoutButton value={packet} buttonType="Packet"/>
 
                 <div className="flex flex-col gap-2">
                     <p className="p-bold-20 text-grey-600">Description:</p>

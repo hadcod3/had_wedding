@@ -38,13 +38,13 @@ const CheckoutButton = (
                 <SignedIn>
                     {/* <Checkout value={value} userId={userId} /> */}
                     {buttonType === 'Packet' && (
-                        <Checkout value={value as IPacket} userId={userId} />
+                        <Checkout value={value as IPacket} userId={userId} isRent={true}/>
                     )}
                     {buttonType === 'Product' && (
-                        <Checkout value={value as IProduct} userId={userId} />
+                        <Checkout value={value as IProduct} userId={userId} isRent={false}/>
                     )}
                     {buttonType === 'Gear' && (
-                        <Checkout value={value as IGear} userId={userId} />
+                        <Checkout value={value as IGear} userId={userId} isRent={true}/>
                     )}
                 </SignedIn>
             </>

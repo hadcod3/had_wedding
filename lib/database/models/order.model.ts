@@ -2,29 +2,28 @@ import { Schema, model, models } from 'mongoose'
 
 const OrderSchema = new Schema({
     createdAt: {
-      type: Date,
-      default: Date.now,
+        type: Date,
+        default: Date.now,
     },
     stripeId: {
-      type: String,
-      required: true,
-      unique: true,
+        type: String,
+        required: true,
+        unique: true,
     },
     totalAmount: {
-      type: String,
+        type: String, 
     },
-    item: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Packet',
-        type: String
+    item:{
+        type: Schema.Types.ObjectId,
+        ref: 'Packet',
     },
     buyer: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     },
-  })
+})
    
-  const Order = models.Order || model('Order', OrderSchema)
+const Order = models.Order || model('Order', OrderSchema)
   
-  export default Order
+export default Order
   

@@ -172,7 +172,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
             </section>
 
             {/* FAQ SECTION */}
-            {/* <section className="flex items-center justify-center flex-col py-10 gap-5">
+            <section className="flex items-center justify-center flex-col py-10 gap-5">
                 <h2 className="h2-bold text-center">FAQs</h2>
                 <Accordion type="single" collapsible defaultValue={faqList[0].index} className="flex justify-center flex-col gap-5 px-5 sm:px-20 w-full sm:w-[80%]">
                     {faqList.map((item) => {
@@ -184,7 +184,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
                         )
                     })}
                 </Accordion>
-            </section> */}
+            </section>
 
             {/* FOOTER MAIN PAGE */}
             <section className="flex items-end justify-center bg-gray-200">

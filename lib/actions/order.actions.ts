@@ -78,7 +78,7 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
           },
         ],
         metadata: {
-          eventId: order.itemId,
+          itemId: order.itemId,
           buyerId: order.buyerId,
         },
         mode: 'payment',

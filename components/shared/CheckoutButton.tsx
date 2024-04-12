@@ -9,13 +9,15 @@ import { IPacket } from '@/lib/database/models/packet.model';
 import { IProduct } from '@/lib/database/models/product.model';
 import { IGear } from '@/lib/database/models/gear.model';
 
-type ButtonProps = {
-    buttonType?: 'Packet' | 'Product' | 'Gear';
-}
+// type ButtonProps = {
+//     buttonType?: 'Packet' | 'Product' | 'Gear';
+// }
 
 const CheckoutButton = (
-    { buttonType, value }
-    : { buttonType: ButtonProps['buttonType'], value: IPacket | IProduct | IGear }) => {
+    { packet }
+    : { 
+        // buttonType: ButtonProps['buttonType'], value: IPacket | IProduct | IGear, 
+    packet: IPacket }) => {
 
     const { user } = useUser();
     const userId = user?.publicMetadata.userId as string;
@@ -32,7 +34,8 @@ const CheckoutButton = (
             </SignedOut>
 
             <SignedIn>
-                {buttonType === 'Packet' && (
+                <Checkout packet={packet} userId={userId} />
+                {/* {buttonType === 'Packet' && (
                     <Checkout value={value as IPacket} userId={userId} />
                 )}
                 {buttonType === 'Product' && (
@@ -40,7 +43,7 @@ const CheckoutButton = (
                 )}
                 {buttonType === 'Gear' && (
                     <Checkout value={value as IGear} userId={userId} />
-                )}
+                )} */}
             </SignedIn>
             </>
         </div>

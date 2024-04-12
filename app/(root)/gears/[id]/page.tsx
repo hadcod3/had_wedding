@@ -29,7 +29,7 @@ const GearDetails = async ({ params: { id }, searchParams }: SearchParamProps) =
             </div>
           </div>
 
-        <CheckoutButton value={gear} buttonType="Gear" />
+        {/* <CheckoutButton value={gear} buttonType="Gear" /> */}
 
           <div className="flex flex-col gap-2">
             <p className="p-bold-20 text-grey-600">Description:</p>

@@ -36,7 +36,7 @@ const ProductDetails = async ({ params: { id }, searchParams }: SearchParamProps
                 </div>
             </div>
 
-            <CheckoutButton value={product} buttonType="Product" />
+            {/* <CheckoutButton value={product} buttonType="Product" /> */}
 
             <div className="flex flex-col gap-2">
                 <p className="p-bold-20 text-grey-600">Description:</p>

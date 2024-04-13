@@ -15,7 +15,7 @@ const OrderSchema = new Schema({
     },
     item:{
         type: Schema.Types.ObjectId,
-        ref: 'Packet',
+        refPath: ['Packet', 'Product', "Gear"],
     },
     buyer: {
         type: Schema.Types.ObjectId,

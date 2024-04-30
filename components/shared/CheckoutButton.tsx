@@ -15,9 +15,11 @@ type ButtonProps = {
 
 const CheckoutButton = (
     { 
-        value, buttonType 
+        value, buttonType, amount 
     } : { 
-        buttonType: ButtonProps['buttonType'], value: IPacket | IProduct | IGear, 
+        buttonType: ButtonProps['buttonType'], 
+        value: IPacket | IProduct | IGear, 
+        amount: number
     // packet: IPacket 
     }) => {
 
@@ -25,7 +27,7 @@ const CheckoutButton = (
     const userId = user?.publicMetadata.userId as string;
  
     return (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 ">
             <>
                 <SignedOut>
                     <Button asChild className="button rounded-full" size="lg">
@@ -38,13 +40,13 @@ const CheckoutButton = (
                 <SignedIn>
                     {/* <Checkout value={value} userId={userId} /> */}
                     {buttonType === 'Packet' && (
-                        <Checkout value={value as IPacket} userId={userId} isRent={true}/>
+                        <Checkout value={value as IPacket} userId={userId} isRent={true} amount={amount}/>
                     )}
                     {buttonType === 'Product' && (
-                        <Checkout value={value as IProduct} userId={userId} isRent={false}/>
+                        <Checkout value={value as IProduct} userId={userId} isRent={false} amount={amount}/>
                     )}
                     {buttonType === 'Gear' && (
-                        <Checkout value={value as IGear} userId={userId} isRent={true}/>
+                        <Checkout value={value as IGear} userId={userId} isRent={true} amount={amount}/>
                     )}
                 </SignedIn>
             </>

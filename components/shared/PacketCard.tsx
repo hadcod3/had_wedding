@@ -20,19 +20,19 @@ const Card = ({ item }: CardProps) => {
         className="flex min-h-[230px] flex-col gap-3 p-5 md:gap-4"
       > 
         <div className="flex gap-2">
-            <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60">
+            <span className="p-semibold-14 w-min rounded-full bg-primary-200 px-4 py-1 text-primary-500">
                 Rp{parseInt(item.price).toLocaleString()}
             </span>
-            <p className="p-semibold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
+            <p className="p-semibold-14 w-min rounded-full bg-primary-100 px-4 py-1 text-primary-400 line-clamp-1">
                 {item.category?.name}
             </p>
         </div>
 
         <Link href={`/packets/${item._id}`}>
-          <p className="p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black">{item.title}</p>
+          <p className="p-medium-16 md:p-medium-20 line-clamp-2 flex-1  text-primary-500">{item.title}</p>
         </Link>
 
-        <p className="line-clamp-4">
+        <p className="line-clamp-4 text-primary-500">
             {item.description}
         </p>
 

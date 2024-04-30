@@ -19,7 +19,7 @@ const Gears = async ({ searchParams }: SearchParamProps) => {
     return (
         <>
             <section className="wrapper my-8 flex flex-col md:gap-12">
-                <h2 className="h2-bold">Trusted by <br/> Thousands of customers</h2>
+                <h2 className="h2-bold font-playfair text-primary-500">Trusted by <br/> Thousands of customers</h2>
                 <div className="flex w-full flex-col gap-5 py-5 md:flex-row">
                     <Search placeholder="Search Product"/>
                     <GearCategoryFilter/>

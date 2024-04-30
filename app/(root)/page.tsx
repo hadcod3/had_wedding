@@ -42,16 +42,16 @@ export default async function Home({ searchParams }: SearchParamProps) {
     return (
         <>
             {/* HERO SECTION */}
-            <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
+            <section className="bg-primary-100/50 bg-dotted-pattern bg-contain py-5 md:py-10">
                 <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0">
                     <div className="flex flex-col justify-center gap-8">
-                        <h1 className="h1-bold" data-aos="fade-right">
+                        <h1 className="h1-bold text-primary-500 font-playfair" data-aos="fade-right">
                             Make your dream wedding come true with us!
                         </h1>
-                        <p className="p-regular-20 md:p-regular-24" data-aos="fade-right" data-aos-delay="150">
+                        <p className="p-regular-20 md:p-regular-24 text-primary-400" data-aos="fade-right" data-aos-delay="150">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque temporibus optio magnam sint veniam nulla error vero amet nostrum accusamus.
                         </p>
-                        <Button size="lg" asChild className="button w-full sm:w-fit" data-aos="fade-right" data-aos-anchor-placement="bottom-bottom" data-aos-delay="300">
+                        <Button size="lg" asChild className="button w-full sm:w-fit bg-primary-400" data-aos="fade-right" data-aos-anchor-placement="bottom-bottom" data-aos-delay="300">
                             <Link href="#packets">Explore Now</Link>
                         </Button>
                     </div>
@@ -79,7 +79,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
 
             {/* PACKETS DISPLAY SECTION */}
             <section id="packets" className="wrapper my-8 flex flex-col md:gap-12">
-                <h2 className="h2-bold text-center">Trusted by <br/> Thousands of Customers</h2>
+                <h2 className="h2-bold text-center text-primary-500 font-playfair">Trusted by <br/> Thousands of Customers</h2>
                 <Collection
                 data={packets?.data}
                 emptyTitle="No Packets Found"
@@ -92,10 +92,10 @@ export default async function Home({ searchParams }: SearchParamProps) {
             </section>
         
             {/* MILESTONE */}
-            <section className="relative flex items-center justify-center flex-col gap-y-7 bg-gray-100 py-14 md:py-10" id="about">
+            <section className="relative flex items-center justify-center flex-col gap-y-7 bg-primary-100/50 py-14 md:py-10" id="about">
                 <div className="relative sm:absolute" data-aos="fade-up">
                     {/* Border Center Image */}
-                    <div className="absolute -inset-[25px] w-[300px] h-[400px] rounded-[200px] opacity-70 border-y-4 border-y-gray-400 md:w-[400px] md:h-[550px]"></div>
+                    <div className="absolute -inset-[25px] w-[300px] h-[400px] rounded-[200px] opacity-70 border-y-4 border-y-primary-400 md:w-[400px] md:h-[550px]"></div>
                     {/* Center Image */}
                     <Image
                     src={"/assets/images/image-2.jpg"}
@@ -106,49 +106,49 @@ export default async function Home({ searchParams }: SearchParamProps) {
                     />
                 </div>
                 <div className="grid items-center justify-center grid-cols-2 grid-rows-4 gap-x-[0px] gap-y-[0px] md:gap-x-[450px] md:gap-y-[20px] sm:gap-y-[0px] sm:gap-x-[300px]">
-                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start" data-aos="fade-right">
+                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start text-primary-500" data-aos="fade-right">
                         <div className="text-4xl font-bold flex relative">
                             20<span className="text-sm absolute -right-4">th</span>
                         </div>
                         <div className="text-base md:text-clip leading-5 text-center">years of existence</div>
                     </div>
-                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start" data-aos="fade-left">
+                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start text-primary-500" data-aos="fade-left">
                         <div className="text-4xl font-bold flex relative">
                             4000<span className="text-base absolute -right-3">+</span>
                         </div>
                         <div className="text-base leading-5 text-center">supported events</div>
                     </div>
-                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start" data-aos="fade-right">
+                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start text-primary-500" data-aos="fade-right">
                         <div className="text-4xl font-bold flex relative">
                             35<span className="text-base absolute -right-3">+</span>
                         </div>
                         <div className="text-base leading-5 text-center">wedding package</div>
                     </div>
-                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start" data-aos="fade-left">
+                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start text-primary-500" data-aos="fade-left">
                         <div className="text-4xl font-bold flex relative">
                             25<span className="text-base absolute -right-3">+</span>
                         </div>
                         <div className="text-base leading-5 text-center">vendors</div>
                     </div>
-                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start" data-aos="fade-right">
+                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start text-primary-500" data-aos="fade-right">
                         <div className="text-4xl font-bold flex relative">
                             10<span className="text-base absolute -right-3">+</span>
                         </div>
                         <div className="text-base leading-5 text-center">event themes</div>
                     </div>
-                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start" data-aos="fade-left">
+                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start text-primary-500" data-aos="fade-left">
                         <div className="text-4xl font-bold flex relative">
                             150<span className="text-base absolute -right-3">+</span>
                         </div>
                         <div className="text-base leading-5 text-center">event tool types</div>
                     </div>
-                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start" data-aos="fade-right">
+                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start text-primary-500" data-aos="fade-right">
                         <div className="text-4xl font-bold flex relative">
                             100<span className="text-base absolute -right-3">+</span>
                         </div>
                         <div className="text-base leading-5 text-center">venues</div>
                     </div>
-                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start" data-aos="fade-left">
+                    <div className="w-[150px] h-[110px] p-4 flex flex-col items-center justify-start text-primary-500" data-aos="fade-left">
                         <div className="text-4xl font-bold flex relative">
                             1000<span className="text-base absolute -right-3">+</span>
                         </div>
@@ -159,7 +159,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
 
             {/* PRODUCTS DISPLAY SECTION */}
             <section className="wrapper my-8 flex flex-col md:gap-12">
-                <h2 className="h2-bold text-center">Support by<br/>our best products</h2>
+                <h2 className="h2-bold text-center text-primary-500 font-playfair">Support by<br/>our best products</h2>
                 <ProductCollection
                 data={products?.data}
                 emptyTitle="No Products Found"
@@ -173,13 +173,13 @@ export default async function Home({ searchParams }: SearchParamProps) {
 
             {/* FAQ SECTION */}
             <section className="flex items-center justify-center flex-col py-10 gap-5">
-                <h2 className="h2-bold text-center">FAQs</h2>
+                <h2 className="h2-bold text-center text-primary-500 font-playfair">FAQs</h2>
                 <Accordion type="single" collapsible defaultValue={faqList[0].index} className="flex justify-center flex-col gap-5 px-5 sm:px-20 w-full sm:w-[80%]">
                     {faqList.map((item) => {
                         return (
                             <AccordionItem value={item.index}>
-                                <AccordionTrigger>{item.quest}</AccordionTrigger>
-                                <AccordionContent>{item.answer}</AccordionContent>
+                                <AccordionTrigger className=" text-primary-500">{item.quest}</AccordionTrigger>
+                                <AccordionContent className=" text-primary-400">{item.answer}</AccordionContent>
                             </AccordionItem>
                         )
                     })}
@@ -187,11 +187,11 @@ export default async function Home({ searchParams }: SearchParamProps) {
             </section>
 
             {/* FOOTER MAIN PAGE */}
-            <section className="flex items-end justify-center bg-gray-200">
+            <section className="flex items-end justify-center bg-primary-100/50">
                 <div className="py-3 md:pt-6 md:pb-12 relative flex justify-center">
                     <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] flex items-center justify-center rounded-full bg-white z-[2]">
                         <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] rounded-full border-t-4 border-b-4 border-amber-500 flex items-center justify-center flex-col">
-                            <h5 className="text-xs sm:text-base md:text-lg">wedding agency</h5>
+                            <h5 className="text-xs sm:text-base md:text-lg font-playfair">wedding organizer</h5>
                             <Image
                                 src={"/assets/images/text_logo.png"}
                                 className="object-contain scale-[0.7] sm:scale-75 md:scale-100"
@@ -217,7 +217,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
                                 />
                         </div>
                     </div>
-                    <div className="absolute bottom-0 hidden md:block w-[500px] h-[300px] z-[1] bg-gray-300"></div>
+                    <div className="absolute bottom-0 hidden md:block w-[500px] h-[300px] z-[1] bg-primary-200"></div>
                 </div>
             </section>
         </>

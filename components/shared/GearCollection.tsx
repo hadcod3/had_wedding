@@ -45,7 +45,7 @@ const ProductCollection = ({
           )}
 
           { collectionType === 'Sample_Products' && (
-                <Button size="lg" asChild className="button w-full sm:w-fit">
+                <Button size="lg" asChild className="button w-full sm:w-fit bg-primary-400 hover:bg-primary-500 transition-colors duration-200 ease-in-out">
                     <Link href="/gears">See More Gears</Link>
                 </Button>
           )}

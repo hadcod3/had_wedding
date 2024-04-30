@@ -15,7 +15,7 @@ const ProductDetails = async ({ params: { id }, searchParams }: SearchParamProps
 
     return (
         <>
-        <section className="flex justify-center bg-primary-50 bg-dotted-pattern bg-contain">
+        <section className="flex justify-center bg-primary-100 bg-dotted-pattern bg-contain">
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl">
             <Image 
             src={product.imageUrl}
@@ -36,7 +36,7 @@ const ProductDetails = async ({ params: { id }, searchParams }: SearchParamProps
                 </div>
             </div>
 
-            <CheckoutButton value={product} buttonType="Product" />
+            <CheckoutButton value={product} buttonType="Product" amount={2000}/>
 
             <div className="flex flex-col gap-2">
                 <p className="p-bold-20 text-grey-600">Description:</p>

@@ -8,7 +8,8 @@ import { IGear } from '@/lib/database/models/gear.model';
 
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
-const Checkout = ({ value, userId, isRent } : { value: IPacket | IProduct | IGear, userId: string, isRent: boolean }) => {
+const Checkout = ({ value, userId, isRent, amount } 
+    : { value: IPacket | IProduct | IGear, userId: string, isRent: boolean, amount: number }) => {
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
         if (query.get('success')) {
@@ -30,7 +31,8 @@ const Checkout = ({ value, userId, isRent } : { value: IPacket | IProduct | IGea
                     itemTitle: (value as IPacket).title,
                     itemId: (value as IPacket)._id,
                     price: (value as IPacket).price,
-                    buyerId: userId
+                    buyerId: userId,
+                    amount: amount
                 };
                 break;
             case 'title' in value && '_id' in value && 'price' in value:
@@ -39,7 +41,8 @@ const Checkout = ({ value, userId, isRent } : { value: IPacket | IProduct | IGea
                     itemTitle: (value as IProduct).title,
                     itemId: (value as IProduct)._id,
                     price: (value as IProduct).price,
-                    buyerId: userId
+                    buyerId: userId,
+                    amount: amount
                 };
                 break;
             case 'title' in value && '_id' in value && 'price' in value:
@@ -48,7 +51,8 @@ const Checkout = ({ value, userId, isRent } : { value: IPacket | IProduct | IGea
                     itemTitle: (value as IGear).title,
                     itemId: (value as IGear)._id,
                     price: (value as IGear).price,
-                    buyerId: userId
+                    buyerId: userId,
+                    amount: amount
                 };
                 break;
             default:
@@ -61,7 +65,7 @@ const Checkout = ({ value, userId, isRent } : { value: IPacket | IProduct | IGea
 
     return (
         <form action={onCheckout} method="post">
-            <Button type="submit" role="link" size="lg" className="button sm:w-fit">
+            <Button type="submit" role="link" size="lg" className="button sm:w-fit bg-primary-500">
                 {isRent ? "Rent Now" : "Buy Now"}
             </Button>
         </form>

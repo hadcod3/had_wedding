@@ -18,15 +18,15 @@ const GearCard = ({ event }: CardProps) => {
 
         <div className="flex max-h-[130px] flex-col gap-1 p-2 md:gap-1"> 
             <Link href={`/gears/${event._id}`}>
-            <p className="p-medium-16 line-clamp-1 flex-1 text-black">{event.title}</p>
+            <p className="p-medium-16 line-clamp-1 flex-1 text-primary-400">{event.title}</p>
             </Link>
 
-            <span className="font-semibold text-base">
+            <span className="font-semibold text-primary-500">
                 Rp {parseInt(event.price).toLocaleString()}
             </span>
 
             <div className="flex-between w-full">
-            <p className="p-medium-14 text-grey-600">
+            <p className="p-medium-14 text-primary-300">
                 Stock: {event.stock}
             </p>
             </div>

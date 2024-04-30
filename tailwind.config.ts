@@ -20,13 +20,12 @@ module.exports = withUt({
         extend: {
         colors: {
             primary: {
-            500: '#624CF5',
-            50: ' #F6F8FD',
-            DEFAULT: '#624CF5',
+            500: '#4E3D42',
+            400: '#6D6466',
+            300: '#9F9F92',
+            200: '#C9D5B5',
+            100: ' #E3DBDB',
             foreground: 'hsl(var(--primary-foreground))',
-            },
-            coral: {
-            500: '#15BF59',
             },
 
             grey: {
@@ -68,6 +67,7 @@ module.exports = withUt({
         },
         fontFamily: {
             poppins: ['var(--font-poppins)'],
+            playfair: ['var(--font-playfair_display)'],
         },
         backgroundImage: {
             'dotted-pattern': "url('/assets/images/dotted-pattern.png')"

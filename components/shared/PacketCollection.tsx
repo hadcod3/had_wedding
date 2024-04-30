@@ -44,7 +44,7 @@ const Collection = ({
           )}
 
           { collectionType === 'Sample_Packages' && (
-                <Button size="lg" asChild className="button w-full sm:w-fit">
+                <Button size="lg" asChild className="button w-full sm:w-fit bg-primary-400 hover:bg-primary-500 transition-colors duration-200 ease-in-out">
                     <Link href="/packets">See More Packets</Link>
                 </Button>
           )}

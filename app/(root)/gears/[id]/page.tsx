@@ -1,11 +1,23 @@
 import CheckoutButton from '@/components/shared/CheckoutButton';
+import GearCollection from '@/components/shared/GearCollection';
 import { Input } from '@/components/ui/input';
-import { getGearById } from '@/lib/actions/gear.actions';
+import { getGearById, getRelatedGearsByCategory } from '@/lib/actions/gear.actions';
 import { SearchParamProps } from '@/types'
 import Image from 'next/image';
+import { auth } from '@clerk/nextjs'
 
 const GearDetails = async ({ params: { id }, searchParams }: SearchParamProps) => {
     const gear = await getGearById(id);
+
+    const relatedGears = await getRelatedGearsByCategory({
+        categoryId: gear.category._id,
+        gearId: gear._id,
+        page: searchParams.page as string,
+    })
+
+    const { sessionClaims } = auth();
+    const userId = sessionClaims?.userId as string;
+    const isOrganizer = userId === gear.organizer._id.toString();
 
     return (
         <>
@@ -30,7 +42,9 @@ const GearDetails = async ({ params: { id }, searchParams }: SearchParamProps) =
                         </div>
                     </div>
 
-                    <CheckoutButton value={gear} buttonType="Gear" amount={2}/>
+                    {!isOrganizer && (
+                        <CheckoutButton value={gear} buttonType="Gear" amount={2}/>
+                    )}
                     <Input type='number' placeholder='pcs'/>
                 
                     <div className="flex flex-col gap-2">
@@ -40,6 +54,21 @@ const GearDetails = async ({ params: { id }, searchParams }: SearchParamProps) =
                     </div>
                     </div>
                 </div>
+            </section>
+
+            {/* Gears with the same category */}
+            <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
+            <h2 className="h2-bold">Related Gears</h2>
+
+            <GearCollection 
+                data={relatedGears?.data}
+                emptyTitle="No Gears Found"
+                emptyStateSubtext="Come back later"
+                collectionType="All_Gears"
+                limit={3}
+                page={searchParams.page as string}
+                totalPages={relatedGears?.totalPages}
+                />
             </section>
         </>
     )

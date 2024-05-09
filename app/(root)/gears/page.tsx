@@ -21,14 +21,14 @@ const Gears = async ({ searchParams }: SearchParamProps) => {
             <section className="wrapper my-8 flex flex-col md:gap-12">
                 <h2 className="h2-bold font-playfair text-primary-500">Trusted by <br/> Thousands of customers</h2>
                 <div className="flex w-full flex-col gap-5 py-5 md:flex-row">
-                    <Search placeholder="Search Product"/>
+                    <Search placeholder="Search"/>
                     <GearCategoryFilter/>
                 </div>
                 <GearCollection
                     data={gears?.data}
                     emptyTitle="No Gears Found"
                     emptyStateSubtext="Check later"
-                    collectionType="All_Products"
+                    collectionType="All_Gears"
                     limit={15}
                     page={page}
                     totalPages={gears?.totalPages}

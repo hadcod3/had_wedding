@@ -3,8 +3,7 @@ import { getAllPackets } from "@/lib/actions/packet.actions";
 import { SearchParamProps } from '@/types';
 import Image from "next/image";
 import Link from "next/link";
-import Collection from "@/components/shared/PacketCollection";
-import ProductCollection from "@/components/shared/ProductCollection";
+import PacketCollection from "@/components/shared/PacketCollection";
 import { getAllProducts } from "@/lib/actions/product.actions";
 import { getAllGears } from "@/lib/actions/gear.actions";
 import {
@@ -14,6 +13,8 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { faqList } from "@/constants";
+import ProductCollection from "@/components/shared/ProductCollection";
+import GearCollection from "@/components/shared/GearCollection";
   
 export default async function Home({ searchParams }: SearchParamProps) {
     const page = Number(searchParams?.page) || 1;
@@ -42,16 +43,16 @@ export default async function Home({ searchParams }: SearchParamProps) {
     return (
         <>
             {/* HERO SECTION */}
-            <section className="bg-primary-100/50 bg-dotted-pattern bg-contain py-5 md:py-10">
+            <section className="bg-primary-200/20 bg-dotted-pattern bg-contain">
                 <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0">
                     <div className="flex flex-col justify-center gap-8">
                         <h1 className="h1-bold text-primary-500 font-playfair" data-aos="fade-right">
                             Make your dream wedding come true with us!
                         </h1>
-                        <p className="p-regular-20 md:p-regular-24 text-primary-400" data-aos="fade-right" data-aos-delay="150">
+                        <p className="p-regular-20 md:p-regular-24 text-primary-400 font-poppins" data-aos="fade-right" data-aos-delay="150">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque temporibus optio magnam sint veniam nulla error vero amet nostrum accusamus.
                         </p>
-                        <Button size="lg" asChild className="button w-full sm:w-fit bg-primary-400" data-aos="fade-right" data-aos-anchor-placement="bottom-bottom" data-aos-delay="300">
+                        <Button size="lg" asChild className="button w-full sm:w-fit bg-primary-200 text-primary-500" data-aos="fade-right" data-aos-anchor-placement="bottom-bottom" data-aos-delay="300">
                             <Link href="#packets">Explore Now</Link>
                         </Button>
                     </div>
@@ -80,11 +81,11 @@ export default async function Home({ searchParams }: SearchParamProps) {
             {/* PACKETS DISPLAY SECTION */}
             <section id="packets" className="wrapper my-8 flex flex-col md:gap-12">
                 <h2 className="h2-bold text-center text-primary-500 font-playfair">Trusted by <br/> Thousands of Customers</h2>
-                <Collection
+                <PacketCollection
                 data={packets?.data}
                 emptyTitle="No Packets Found"
                 emptyStateSubtext="Check later"
-                collectionType="Sample_Packages"
+                collectionType="Sample_Packets"
                 limit={3}
                 page={page}
                 totalPages={packets?.totalPages}
@@ -92,7 +93,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
             </section>
         
             {/* MILESTONE */}
-            <section className="relative flex items-center justify-center flex-col gap-y-7 bg-primary-100/50 py-14 md:py-10" id="about">
+            <section className="relative flex items-center justify-center flex-col gap-y-7 bg-primary-100/30 py-14 md:py-10" id="about">
                 <div className="relative sm:absolute" data-aos="fade-up">
                     {/* Border Center Image */}
                     <div className="absolute -inset-[25px] w-[300px] h-[400px] rounded-[200px] opacity-70 border-y-4 border-y-primary-400 md:w-[400px] md:h-[550px]"></div>
@@ -159,7 +160,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
 
             {/* PRODUCTS DISPLAY SECTION */}
             <section className="wrapper my-8 flex flex-col md:gap-12">
-                <h2 className="h2-bold text-center text-primary-500 font-playfair">Support by<br/>our best products</h2>
+                <h2 className="h2-bold text-center text-primary-500 font-playfair">~ Products ~</h2>
                 <ProductCollection
                 data={products?.data}
                 emptyTitle="No Products Found"
@@ -168,6 +169,20 @@ export default async function Home({ searchParams }: SearchParamProps) {
                 limit={3}
                 page={page}
                 totalPages={products?.totalPages}
+                />
+            </section>
+
+            {/* GEARS DISPLAY SECTION */}
+            <section className="wrapper my-8 flex flex-col md:gap-12">
+                <h2 className="h2-bold text-center text-primary-500 font-playfair">~ Gears ~</h2>
+                <GearCollection
+                data={gears?.data}
+                emptyTitle="No Gears Found"
+                emptyStateSubtext="Check later"
+                collectionType="Sample_Gears"
+                limit={5}
+                page={page}
+                totalPages={gears?.totalPages}
                 />
             </section>
 

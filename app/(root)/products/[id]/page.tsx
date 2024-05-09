@@ -3,6 +3,7 @@ import ProductCollection from '@/components/shared/ProductCollection';
 import { getProductById, getRelatedProductsByCategory } from '@/lib/actions/product.actions';
 import { SearchParamProps } from '@/types'
 import Image from 'next/image';
+import { auth } from '@clerk/nextjs'
 
 const ProductDetails = async ({ params: { id }, searchParams }: SearchParamProps) => {
     const product = await getProductById(id);
@@ -12,6 +13,10 @@ const ProductDetails = async ({ params: { id }, searchParams }: SearchParamProps
         productId: product._id,
         page: searchParams.page as string,
     })
+
+    const { sessionClaims } = auth();
+    const userId = sessionClaims?.userId as string;
+    const isOrganizer = userId === product.organizer._id.toString();
 
     return (
         <>
@@ -36,7 +41,9 @@ const ProductDetails = async ({ params: { id }, searchParams }: SearchParamProps
                 </div>
             </div>
 
-            <CheckoutButton value={product} buttonType="Product" amount={2000}/>
+            {!isOrganizer && (
+                <CheckoutButton value={product} buttonType="Product" amount={2000}/>
+            )}
 
             <div className="flex flex-col gap-2">
                 <p className="p-bold-20 text-grey-600">Description:</p>

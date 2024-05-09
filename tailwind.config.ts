@@ -27,13 +27,13 @@ module.exports = withUt({
             100: ' #E3DBDB',
             foreground: 'hsl(var(--primary-foreground))',
             },
-
             grey: {
             600: '#545454', // Subdued - color name in figma
             500: '#757575',
             400: '#AFAFAF', // Disabled - color name in figma
             50: '#F6F6F6', // White Grey - color name in figma
             },
+            danger: "#D7191C",
             black: '#000000',
             white: '#FFFFFF',
             border: 'hsl(var(--border))',

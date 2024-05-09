@@ -1,8 +1,10 @@
 import CheckoutButton from '@/components/shared/CheckoutButton';
-import Collection from '@/components/shared/PacketCollection';
+import PacketCollection from '@/components/shared/PacketCollection';
 import { getPacketById, getRelatedPacketsByCategory } from '@/lib/actions/packet.actions'
 import { SearchParamProps } from '@/types'
 import Image from 'next/image';
+import { auth } from '@clerk/nextjs'
+
 
 const PackageDetails = async ({ params: { id }, searchParams }: SearchParamProps) => {
     const packet = await getPacketById(id);
@@ -12,6 +14,10 @@ const PackageDetails = async ({ params: { id }, searchParams }: SearchParamProps
         packetId: packet._id,
         page: searchParams.page as string,
     })
+
+    const { sessionClaims } = auth();
+    const userId = sessionClaims?.userId as string;
+    const isOrganizer = userId === packet.organizer._id.toString();
 
     return (
         <>
@@ -40,7 +46,9 @@ const PackageDetails = async ({ params: { id }, searchParams }: SearchParamProps
                         </div>
                     </div>
 
-                <CheckoutButton value={packet} buttonType="Packet" amount={1}/>
+                {!isOrganizer && (
+                    <CheckoutButton value={packet} buttonType="Packet" amount={1}/>
+                )}
 
                 <div className="flex flex-col gap-2">
                     <p className="p-bold-20 text-grey-600">Description:</p>
@@ -55,11 +63,11 @@ const PackageDetails = async ({ params: { id }, searchParams }: SearchParamProps
             <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
             <h2 className="h2-bold">Related Packets</h2>
 
-            <Collection 
+            <PacketCollection 
                 data={relatedPackets?.data}
                 emptyTitle="No Packets Found"
                 emptyStateSubtext="Come back later"
-                collectionType="All_Events"
+                collectionType="All_Packets"
                 limit={3}
                 page={searchParams.page as string}
                 totalPages={relatedPackets?.totalPages}

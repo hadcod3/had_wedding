@@ -13,10 +13,10 @@ type GearCollectionProps = {
   page: number | string,
   totalPages?: number,
   urlParamName?: string,
-  collectionType?: 'All_Products' | 'Sample_Products'
+  collectionType?: 'Gears_Organized' | 'All_Gears' | 'Sample_Gears'
 }
 
-const ProductCollection = ({
+const GearCollection = ({
   data,
   emptyTitle,
   emptyStateSubtext,
@@ -25,27 +25,32 @@ const ProductCollection = ({
   collectionType,
   urlParamName,
 }: GearCollectionProps) => {
+    
   return (
     <>
       {data.length > 0 ? (
         <div className="flex flex-col items-center gap-5">
           <ul className="grid w-full gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:gap-10">
-            {data.map((event) => {
+            {data.map((item) => {
 
               return (
-                <li key={event._id} className="flex w-full justify-center">
-                    <GearCard event={event}/>
+                <li key={item._id} className="flex w-full justify-center">
+                    { collectionType === "Gears_Organized" ? (
+                        <GearCard item={item} organized={true}/>
+                    ) : (
+                        <GearCard item={item} organized={false}/>
+                    )}
                 </li>
               )
             })}
           </ul>
 
-          {totalPages > 1 && collectionType !== 'Sample_Products' && (
+          {totalPages > 1 && collectionType !== 'Sample_Gears' && (
                 <Pagination urlParamName={urlParamName} page={page} totalPages={totalPages} />
           )}
 
-          { collectionType === 'Sample_Products' && (
-                <Button size="lg" asChild className="button w-full sm:w-fit bg-primary-400 hover:bg-primary-500 transition-colors duration-200 ease-in-out">
+          { collectionType === 'Sample_Gears' && (
+                <Button size="lg" asChild className="button w-full sm:w-fit bg-primary-1000 hover:bg-primary-400 transition-colors duration-200 ease-in-out">
                     <Link href="/gears">See More Gears</Link>
                 </Button>
           )}
@@ -60,4 +65,4 @@ const ProductCollection = ({
   )
 }
 
-export default ProductCollection
+export default GearCollection

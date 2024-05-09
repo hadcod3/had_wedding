@@ -14,11 +14,11 @@ const NavItems = () => {
 
                 return (
                     <li 
-                    key={link.route}
-                    className={`${
-                        isActive && 'text-primary-300'
-                    } flex-center p-medium-16 whitespace-nowrap text-primary-500 transition-colors duration-200 ease-in-out`}
-                    >
+                        key={link.route}
+                        className={`${
+                            isActive && 'text-primary-300'
+                        } flex-center p-medium-16 whitespace-nowrap text-primary-500 transition-colors duration-200 ease-in-out`}
+                        >
                         <Link href={link.route}>{link.label}</Link>
                     </li>
                 )

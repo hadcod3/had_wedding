@@ -9,8 +9,8 @@ const Footer = () => {
                 <Image 
                     src="/assets/images/logo.png"
                     alt="logo"
-                    width={150}
-                    height={50}
+                    width={100}
+                    height={30}
                 />
                 </Link>
 

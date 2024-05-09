@@ -8,14 +8,14 @@ import MobileNav from "./MobileNav"
 
 const Header = () => {
   return (
-    <header className="w-full border-b">
+    <header className="w-full h-[75px] shadow fixed inset-0 z-50 bg-white/30 backdrop-blur-lg">
         <div className="wrapper flex items-center justify-between">
             <Link href="/" className="flex items-center gap-5">
                 <Image
                     src="/assets/images/logo.png"
                     alt="Had Wedding Logo"
-                    width={200}
-                    height={40}
+                    width={150}
+                    height={30}
                 />
             </Link>
 
@@ -32,9 +32,9 @@ const Header = () => {
                     <MobileNav/>
                 </SignedIn>
                 <SignedOut>
-                    <Button asChild className="rounded-full bg-primary-1000 hover:bg-primary-400 transition-colors duration-200 ease-in-out" size="lg">
+                    <Button asChild className="rounded-full bg-primary-400 hover:bg-primary-500 transition-colors duration-200 ease-in-out" size="lg">
                         <Link href="/sign-in">
-                            Login
+                            LOGIN
                         </Link>
                     </Button>
                 </SignedOut>

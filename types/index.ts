@@ -40,6 +40,15 @@ export type CreateOrderParams = {
     totalAmount: string
     createdAt: Date
 }
+export type GetOrdersByPacketParams = {
+    eventId: string
+    searchString: string
+}
+export type GetOrdersByUserParams = {
+    userId: string | null
+    limit?: number
+    page: string | number | null
+}
   
 // ====== URL QUERY PARAMS
 export type UrlQueryParams = {
@@ -58,6 +67,7 @@ export type SearchParamProps = {
 
 // ====== PACKET PARAMS
 export type CreatePacketParams = {
+    userId: string
     packet: {
       title: string
       description: string
@@ -68,6 +78,7 @@ export type CreatePacketParams = {
     path: string
 }
 export type UpdatePacketParams = {
+    userId: string
     packet: {
       _id: string
       title: string
@@ -88,6 +99,11 @@ export type GetAllPacketsParams = {
     limit: number
     page: number
 }
+export type GetPacketsByUserParams = {
+    userId: string
+    limit?: number
+    page: number
+}
 export type GetRelatedPacketsByCategoryParams = {
     categoryId: string
     packetId: string
@@ -100,14 +116,20 @@ export type Packet = {
     description: string
     price: string
     imageUrl: string
+    organizer: {
+        _id: string
+        firstName: string
+        lastName: string
+    }
     category: {
-      _id: string
-      name: string
+        _id: string
+        name: string
     }
 }
 
 // ====== PRODUCT PARAMS
-export type CreateProductsParams = {
+export type CreateProductParams = {
+    userId: string
     product: {
         title: string
         description: string
@@ -118,7 +140,8 @@ export type CreateProductsParams = {
     }
     path: string
 }
-export type UpdateProductsParams = {
+export type UpdateProductParams = {
+    userId: string
     product: {
         _id: string
         title: string
@@ -140,6 +163,11 @@ export type GetAllProductsParams = {
     limit: number
     page: number
 }
+export type GetProductsByUserParams = {
+    userId: string
+    limit?: number
+    page: number
+}
 export type GetRelatedProductsByCategoryParams = {
     categoryId: string
     productId: string
@@ -153,14 +181,20 @@ export type Product = {
     price: string
     imageUrl: string
     stock: string
+    organizer: {
+        _id: string
+        firstName: string
+        lastName: string
+    }
     category: {
-      _id: string
-      name: string
+        _id: string
+        name: string
     }
 }
 
 // ====== GEAR PARAMS
-export type CreateGearsParams = {
+export type CreateGearParams = {
+    userId: string
     gear: {
         title: string
         description: string
@@ -171,7 +205,8 @@ export type CreateGearsParams = {
     }
     path: string
 }
-export type UpdateGearsParams = {
+export type UpdateGearParams = {
+    userId: string
     gear: {
         _id: string
         title: string
@@ -184,7 +219,7 @@ export type UpdateGearsParams = {
     path: string
 }
 export type DeleteGearParams = {
-    productId: string
+    gearId: string
     path: string
 }
 export type GetAllGearsParams = {
@@ -193,6 +228,17 @@ export type GetAllGearsParams = {
     limit: number
     page: number
 }
+export type GetGearsByUserParams = {
+    userId: string
+    limit?: number
+    page: number
+}
+export type GetRelatedGearsByCategoryParams = {
+    categoryId: string
+    gearId: string
+    limit?: number
+    page: number | string
+}
 export type Gear = {
     _id: string
     title: string
@@ -200,6 +246,11 @@ export type Gear = {
     price: string
     imageUrl: string
     stock: string
+    organizer: {
+        _id: string
+        firstName: string
+        lastName: string
+    }
     category: {
       _id: string
       name: string

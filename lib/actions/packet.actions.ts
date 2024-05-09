@@ -11,6 +11,7 @@ import {
   UpdatePacketParams,
   DeletePacketParams,
   GetAllPacketsParams,
+  GetPacketsByUserParams,
   GetRelatedPacketsByCategoryParams,
 } from '@/types'
 
@@ -19,33 +20,23 @@ const getCategoryByName = async (name: string) => {
 }
 
 const populatePacket = (query: any) => {
-  return query.populate({ path: 'category', model: PacketCategory, select: '_id name' })
+    return query
+    .populate({ path: 'organizer', model: User, select: '_id firstName lastName' })
+    .populate({ path: 'category', model: PacketCategory, select: '_id name' })
 }
 
 // CREATE
-export async function createPacket({ packet, path }: CreatePacketParams) {
+export async function createPacket({ userId, packet, path }: CreatePacketParams) {
   try {
     await connectToDatabase()
 
-    const newPacket = await Packet.create({ ...packet, category: packet.categoryId })
+    const organizer = await User.findById(userId)
+    if (!organizer) throw new Error('Organizer not found')
+
+    const newPacket = await Packet.create({ ...packet, category: packet.categoryId, path, organizer: userId })
     revalidatePath(path)
 
     return JSON.parse(JSON.stringify(newPacket))
-  } catch (error) {
-    handleError(error)
-  }
-}
-
-// GET ONE PACKET BY ID
-export async function getPacketById(packetId: string) {
-  try {
-    await connectToDatabase()
-
-    const packet = await populatePacket(Packet.findById(packetId))
-
-    if (!packet) throw new Error('Packet not found')
-
-    return JSON.parse(JSON.stringify(packet))
   } catch (error) {
     handleError(error)
   }
@@ -58,7 +49,7 @@ export async function updatePacket({ packet, path }: UpdatePacketParams) {
 
     const updatedPacket = await Packet.findByIdAndUpdate(
       packet._id,
-      { ...packet, category: packet.categoryId },
+      { ...packet, path, category: packet.categoryId },
       { new: true }
     )
     revalidatePath(path)
@@ -76,6 +67,21 @@ export async function deletePacket({ packetId, path }: DeletePacketParams) {
 
     const deletedPacket = await Packet.findByIdAndDelete(packetId)
     if (deletedPacket) revalidatePath(path)
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+// GET ONE PACKET BY ID
+export async function getPacketById(packetId: string) {
+  try {
+    await connectToDatabase()
+
+    const packet = await populatePacket(Packet.findById(packetId))
+
+    if (!packet) throw new Error('Packet not found')
+
+    return JSON.parse(JSON.stringify(packet))
   } catch (error) {
     handleError(error)
   }
@@ -135,4 +141,26 @@ export async function getRelatedPacketsByCategory({
   } catch (error) {
     handleError(error)
   }
+}
+
+// GET PACKETS BY ORGANIZER
+export async function getPacketsByUser({ userId, limit = 6, page }: GetPacketsByUserParams) {
+    try {
+      await connectToDatabase()
+  
+      const conditions = { organizer: userId }
+      const skipAmount = (page - 1) * limit
+  
+      const packetsQuery = Packet.find(conditions)
+        .sort({ createdAt: 'desc' })
+        .skip(skipAmount)
+        .limit(limit)
+  
+      const packets = await populatePacket(packetsQuery)
+      const packetsCount = await Packet.countDocuments(conditions)
+  
+      return { data: JSON.parse(JSON.stringify(packets)), totalPages: Math.ceil(packetsCount / limit) }
+    } catch (error) {
+      handleError(error)
+    }
 }

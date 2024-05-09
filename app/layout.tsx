@@ -5,7 +5,7 @@ import "./globals.css";
 
 const poppins = Poppins({ 
     subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
+    weight: ["400", "500", "600", "700", "800", "900"],
     variable: '--font-poppins'
 });
 
@@ -32,7 +32,7 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
-                <body className={`${poppins.variable}, ${playfair.variable}`}>{children}</body>
+                <body className={`${poppins.variable} ${playfair.variable}`}>{children}</body>
             </html>
         </ClerkProvider>
     );

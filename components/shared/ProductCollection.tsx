@@ -13,7 +13,7 @@ type ProductCollectionProps = {
   page: number | string,
   totalPages?: number,
   urlParamName?: string,
-  collectionType?: 'All_Products' | 'Sample_Products'
+  collectionType?: 'Products_Organized' | 'All_Products' | 'Sample_Products'
 }
 
 const ProductCollection = ({
@@ -30,11 +30,15 @@ const ProductCollection = ({
       {data.length > 0 ? (
         <div className="flex flex-col items-center gap-5">
           <ul className="grid w-full gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:gap-10">
-            {data.map((event) => {
+            {data.map((item) => {
 
               return (
-                <li key={event._id} className="flex w-full justify-center">
-                    <ProductCard event={event}/>
+                <li key={item._id} className="flex w-full justify-center">
+                    { collectionType === "Products_Organized" ? (
+                        <ProductCard item={item} organized={true}/>
+                    ) : (
+                        <ProductCard item={item} organized={false}/>
+                    )}
                 </li>
               )
             })}
